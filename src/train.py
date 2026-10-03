@@ -36,7 +36,6 @@ from .dataset import (
     load_image_csv,
     make_loader,
     split_train_val_by_group,
-    stratify_column,
 )
 from .gradcam import run_gradcam_comparison
 from .model import build_model, count_parameters, load_pretrained_checkpoint
@@ -332,7 +331,7 @@ def run_pretraining(cfg: Config, device: torch.device) -> Path:
     out_dir = cfg.pretrain_dir
 
     df = build_lunghist_index(cfg.lunghist_root, cfg.lunghist_csv)
-    train_df, val_df = split_train_val_by_group(df, cfg.pretrain_val_fraction, cfg.seed, stratify_col="label")
+    train_df, val_df = split_train_val_by_group(df, cfg.pretrain_val_fraction, cfg.seed)
     assert_patient_disjoint({"train": train_df, "val": val_df})
     _log_split("train", train_df)
     _log_split("val", val_df)
@@ -378,16 +377,15 @@ def run_pretraining(cfg: Config, device: torch.device) -> Path:
 
 
 # ------------------------------------------------------- cross-validation
-def load_canine_with_folds(cfg: Config) -> tuple[pd.DataFrame, str]:
-    """Canine DataFrame with a 1-based ``fold`` column, plus the stratification column."""
+def load_canine_with_folds(cfg: Config) -> pd.DataFrame:
+    """Canine DataFrame with a 1-based ``fold`` column (patient-level, stratified by label)."""
     df = load_image_csv(cfg.canine_csv)
-    strat_col = stratify_column(df)
-    folds = get_or_create_folds(df, cfg.folds_csv, cfg.n_splits, cfg.seed, strat_col)
+    folds = get_or_create_folds(df, cfg.folds_csv, cfg.n_splits, cfg.seed)
     df = df.merge(folds, on="case_id", how="left", validate="many_to_one")
     if df["fold"].isna().any():
         raise RuntimeError("Some canine images have no fold assignment")
     df["fold"] = df["fold"].astype(int)
-    return df, strat_col
+    return df
 
 
 def run_single_setting(
@@ -479,7 +477,7 @@ def run_cross_validation(
             "Run `python train.py pretrain` first."
         )
 
-    df, strat_col = load_canine_with_folds(cfg)
+    df = load_canine_with_folds(cfg)
     available = sorted(df["fold"].unique().tolist())
     selected = sorted(set(folds)) if folds else available
     unknown = set(selected) - set(available)
@@ -491,7 +489,7 @@ def run_cross_validation(
         test_df = df[df["fold"] == fold].reset_index(drop=True)
         trainval_df = df[df["fold"] != fold].reset_index(drop=True)
         # Inner split is computed once per fold and shared by both settings.
-        train_df, val_df = split_train_val_by_group(trainval_df, cfg.inner_val_fraction, cfg.seed + fold, strat_col)
+        train_df, val_df = split_train_val_by_group(trainval_df, cfg.inner_val_fraction, cfg.seed + fold)
         assert_patient_disjoint({"train": train_df, "val": val_df, "test": test_df})
         _save_split(fold_dir / "split.csv", train=train_df, val=val_df, test=test_df)
         logger.info("=== Fold %d/%d ===", fold, cfg.n_splits)
@@ -531,7 +529,7 @@ def _gradcam_for_fold(cfg: Config, device: torch.device, fold: int, test_df: pd.
 
 def run_gradcam_for_folds(cfg: Config, device: torch.device, folds: Iterable[int] | None = None) -> None:
     """(Re)generate Grad-CAM comparisons from saved fold checkpoints."""
-    df, _ = load_canine_with_folds(cfg)
+    df = load_canine_with_folds(cfg)
     selected = sorted(set(folds)) if folds else sorted(df["fold"].unique().tolist())
     for fold in selected:
         _gradcam_for_fold(cfg, device, fold, df[df["fold"] == fold].reset_index(drop=True))

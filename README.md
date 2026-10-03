@@ -27,9 +27,9 @@ pre-training (step 1), the canine data only for fine-tuning and evaluation (step
               └──── Grad-CAM side by side ────┘
 ```
 
-* **Patient-level stratified 5-fold CV** (`StratifiedGroupKFold`, groups = `case_id`). Stratified by
-  tumour subtype when the CSV has a `subtype` column (this also keeps Normal/Neoplastic balanced),
-  otherwise by label. The fold assignment is saved to `results/folds.csv` and reused by every run,
+* **Patient-level 5-fold CV stratified by Normal/Neoplastic** (`StratifiedGroupKFold`, groups =
+  `case_id`, y = `label`). Every patient's images stay in one fold, and the Normal/Neoplastic
+  proportion is balanced across folds. Tumour subtype is not used. The fold assignment is saved to `results/folds.csv` and reused by every run,
   so A and B are evaluated on exactly the same patients.
 * **No model selection on the test fold.** In each fold, ~20 % of the *training* patients are held
   out as an inner validation set. The checkpoint with the highest validation **balanced accuracy**
@@ -111,8 +111,8 @@ The training code expects a CSV with at least:
 | `image_path` | absolute, or relative to the CSV's folder |
 | `label` | `0` = Normal, `1` = Neoplastic |
 
-Optional columns `subtype` (used for stratification) and `magnification` are kept and copied into the
-prediction files.
+Optional columns `subtype` and `magnification` are informational only. They are kept and copied into
+the prediction files.
 
 Build it from the raw spreadsheet (`PATIENT_ID, IMAGE_ID, OBJECTIVE, SUPERCLASS`) and the image folders:
 

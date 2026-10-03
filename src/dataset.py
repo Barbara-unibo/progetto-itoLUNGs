@@ -392,28 +392,25 @@ def build_lunghist_index(root: Path, csv_path: Path | None = None) -> pd.DataFra
 
 
 # ---------------------------------------------------------------- splitting
-def stratify_column(df: pd.DataFrame) -> str:
-    """Stratify by tumour subtype when available (also balances Normal/Neoplastic)."""
-    if "subtype" in df.columns and df["subtype"].notna().all():
-        return "subtype"
-    return "label"
+def make_patient_folds(df: pd.DataFrame, n_splits: int, seed: int) -> pd.DataFrame:
+    """Assign every case to one of ``n_splits`` folds (1-based).
 
-
-def make_patient_folds(df: pd.DataFrame, n_splits: int, seed: int, stratify_col: str) -> pd.DataFrame:
-    """Assign every case to one of ``n_splits`` folds (1-based) with StratifiedGroupKFold."""
+    StratifiedGroupKFold keeps each patient in a single fold (groups = ``case_id``)
+    while balancing the Normal/Neoplastic label across folds.
+    """
     n_cases = df["case_id"].nunique()
     if n_cases < n_splits:
         raise ValueError(f"Need at least {n_splits} cases for {n_splits}-fold CV, got {n_cases}")
     sgkf = StratifiedGroupKFold(n_splits=n_splits, shuffle=True, random_state=seed)
     assignment: dict[str, int] = {}
-    splits = sgkf.split(np.zeros(len(df)), df[stratify_col].astype(str), df["case_id"])
+    splits = sgkf.split(np.zeros(len(df)), df["label"], df["case_id"])
     for fold, (_, test_idx) in enumerate(splits, start=1):
         for case_id in df["case_id"].iloc[test_idx].unique():
             assignment[str(case_id)] = fold
     return pd.DataFrame(sorted(assignment.items()), columns=["case_id", "fold"])
 
 
-def get_or_create_folds(df: pd.DataFrame, folds_csv: Path, n_splits: int, seed: int, stratify_col: str) -> pd.DataFrame:
+def get_or_create_folds(df: pd.DataFrame, folds_csv: Path, n_splits: int, seed: int) -> pd.DataFrame:
     """Load the persisted fold assignment, or create and save it.
 
     Persisting the folds guarantees that settings A and B (and any re-run) are
@@ -428,10 +425,10 @@ def get_or_create_folds(df: pd.DataFrame, folds_csv: Path, n_splits: int, seed: 
             )
         logger.info("Reusing fold assignment from %s", folds_csv)
     else:
-        folds = make_patient_folds(df, n_splits, seed, stratify_col)
+        folds = make_patient_folds(df, n_splits, seed)
         folds_csv.parent.mkdir(parents=True, exist_ok=True)
         folds.to_csv(folds_csv, index=False)
-        logger.info("Created %d patient-level folds (stratified by %s) -> %s", n_splits, stratify_col, folds_csv)
+        logger.info("Created %d patient-level folds (stratified by Normal/Neoplastic) -> %s", n_splits, folds_csv)
 
     merged = df.merge(folds, on="case_id", how="left")
     for fold, frame in merged.groupby("fold"):
@@ -447,16 +444,14 @@ def get_or_create_folds(df: pd.DataFrame, folds_csv: Path, n_splits: int, seed: 
     return folds
 
 
-def split_train_val_by_group(
-    df: pd.DataFrame, val_fraction: float, seed: int, stratify_col: str = "label"
-) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """Hold out ~``val_fraction`` of the cases (never single images) for validation."""
+def split_train_val_by_group(df: pd.DataFrame, val_fraction: float, seed: int) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Hold out ~``val_fraction`` of the cases (never single images), stratified by label."""
     n_splits = max(2, int(round(1.0 / val_fraction)))
     n_cases = df["case_id"].nunique()
     if n_cases < n_splits:
         raise ValueError(f"Need at least {n_splits} cases for a {val_fraction:.0%} validation split, got {n_cases}")
     sgkf = StratifiedGroupKFold(n_splits=n_splits, shuffle=True, random_state=seed)
-    train_idx, val_idx = next(sgkf.split(np.zeros(len(df)), df[stratify_col].astype(str), df["case_id"]))
+    train_idx, val_idx = next(sgkf.split(np.zeros(len(df)), df["label"], df["case_id"]))
     return df.iloc[train_idx].reset_index(drop=True), df.iloc[val_idx].reset_index(drop=True)
 
 
