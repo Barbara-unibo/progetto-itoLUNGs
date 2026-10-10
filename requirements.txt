@@ -13,3 +13,5 @@ tqdm>=4.66
 
 # Grad-CAM (imported as `pytorch_grad_cam`; pulls in opencv-python)
 grad-cam>=1.5.0
+
+torchstain>=1.4.1
