@@ -1,0 +1,17 @@
+{
+  "fold": 4,
+  "setting": "imagenet",
+  "best_epoch": 12,
+  "val_balanced_accuracy": 0.9817862165963431,
+  "n_test_images": 209,
+  "n_test_cases": 11,
+  "balanced_accuracy": 0.9797979797979798,
+  "accuracy": 0.9808612440191388,
+  "sensitivity": 1.0,
+  "specificity": 0.9595959595959596,
+  "precision": 0.9649122807017544,
+  "f1": 0.9821428571428571,
+  "mcc": 0.9622504486493763,
+  "auc": 0.9998163452708908,
+  "loss": 0.09706564987318937
+}

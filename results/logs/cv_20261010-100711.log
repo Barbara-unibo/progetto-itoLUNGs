@@ -1,0 +1,397 @@
+2026-10-10 10:07:11 | INFO    | train | Command: train.py cv
+2026-10-10 10:07:11 | INFO    | src.utils | Python 3.14.8 | PyTorch 2.11.0+cu128 | platform Linux-7.2.8-cachyos2.fc44.x86_64-x86_64-with-glibc2.43
+2026-10-10 10:07:11 | INFO    | src.utils | GPU: NVIDIA GeForce RTX 5070 | 11.6 GB | CUDA 12.8 | bf16 supported: True
+2026-10-10 10:07:11 | INFO    | src.train | === Canine cross-validation | settings: imagenet, lunghist ===
+2026-10-10 10:07:11 | INFO    | src.dataset | canine.csv: 992 images, 50 cases | Normal=492, Neoplastic=500
+2026-10-10 10:07:11 | INFO    | src.dataset | Created 5 patient-level folds (stratified by Normal/Neoplastic) -> /home/guido/Development/ML/progetto-itoLUNGs/results/folds.csv
+2026-10-10 10:07:11 | INFO    | src.dataset |   fold 1: 11 cases,  209 images (Normal=99, Neoplastic=110)
+2026-10-10 10:07:11 | INFO    | src.dataset |   fold 2:  9 cases,  189 images (Normal=99, Neoplastic=90)
+2026-10-10 10:07:11 | INFO    | src.dataset |   fold 3:  9 cases,  190 images (Normal=100, Neoplastic=90)
+2026-10-10 10:07:11 | INFO    | src.dataset |   fold 4: 11 cases,  209 images (Normal=99, Neoplastic=110)
+2026-10-10 10:07:11 | INFO    | src.dataset |   fold 5: 10 cases,  195 images (Normal=95, Neoplastic=100)
+2026-10-10 10:07:11 | INFO    | src.train | === Fold 1/5 ===
+2026-10-10 10:07:11 | INFO    | src.train |   train 30 cases,  614 images (Normal=314, Neoplastic=300)
+2026-10-10 10:07:11 | INFO    | src.train |   val    9 cases,  169 images (Normal=79, Neoplastic=90)
+2026-10-10 10:07:11 | INFO    | src.train |   test  11 cases,  209 images (Normal=99, Neoplastic=110)
+2026-10-10 10:07:11 | INFO    | src.train | --- fold1-imagenet | A) ImageNet -> Canine ---
+2026-10-10 10:08:01 | INFO    | src.train | [fold1-imagenet] epoch 01/30 | lr 1.00e-04 | train loss 0.2979 bal_acc 0.9499 | val loss 0.3080 bal_acc 0.9333 auc 1.0000 | 49s  <- best
+2026-10-10 10:08:15 | INFO    | src.train | [fold1-imagenet] epoch 02/30 | lr 9.97e-05 | train loss 0.2532 bal_acc 0.9694 | val loss 0.2298 bal_acc 0.9826 auc 0.9990 | 14s  <- best
+2026-10-10 10:08:29 | INFO    | src.train | [fold1-imagenet] epoch 03/30 | lr 9.89e-05 | train loss 0.2093 bal_acc 0.9904 | val loss 0.2648 bal_acc 0.9611 auc 0.9909 | 14s
+2026-10-10 10:08:43 | INFO    | src.train | [fold1-imagenet] epoch 04/30 | lr 9.76e-05 | train loss 0.2157 bal_acc 0.9902 | val loss 0.2694 bal_acc 0.9691 auc 0.9972 | 14s
+2026-10-10 10:08:57 | INFO    | src.train | [fold1-imagenet] epoch 05/30 | lr 9.57e-05 | train loss 0.2097 bal_acc 0.9936 | val loss 0.2168 bal_acc 0.9944 auc 0.9997 | 14s  <- best
+2026-10-10 10:09:11 | INFO    | src.train | [fold1-imagenet] epoch 06/30 | lr 9.34e-05 | train loss 0.2199 bal_acc 0.9889 | val loss 0.2330 bal_acc 0.9833 auc 1.0000 | 14s
+2026-10-10 10:09:25 | INFO    | src.train | [fold1-imagenet] epoch 07/30 | lr 9.05e-05 | train loss 0.2097 bal_acc 0.9951 | val loss 0.2050 bal_acc 0.9944 auc 1.0000 | 14s  <- best
+2026-10-10 10:09:39 | INFO    | src.train | [fold1-imagenet] epoch 08/30 | lr 8.73e-05 | train loss 0.2047 bal_acc 0.9951 | val loss 0.2296 bal_acc 0.9889 auc 0.9977 | 14s
+2026-10-10 10:09:53 | INFO    | src.train | [fold1-imagenet] epoch 09/30 | lr 8.36e-05 | train loss 0.2025 bal_acc 0.9967 | val loss 0.2444 bal_acc 0.9714 auc 0.9987 | 14s
+2026-10-10 10:10:08 | INFO    | src.train | [fold1-imagenet] epoch 10/30 | lr 7.96e-05 | train loss 0.2073 bal_acc 0.9951 | val loss 0.2247 bal_acc 0.9826 auc 0.9993 | 14s
+2026-10-10 10:10:22 | INFO    | src.train | [fold1-imagenet] epoch 11/30 | lr 7.52e-05 | train loss 0.1999 bal_acc 1.0000 | val loss 0.2331 bal_acc 0.9889 auc 0.9998 | 14s
+2026-10-10 10:10:36 | INFO    | src.train | [fold1-imagenet] epoch 12/30 | lr 7.06e-05 | train loss 0.1988 bal_acc 1.0000 | val loss 0.2259 bal_acc 0.9889 auc 0.9993 | 14s
+2026-10-10 10:10:50 | INFO    | src.train | [fold1-imagenet] epoch 13/30 | lr 6.58e-05 | train loss 0.1999 bal_acc 1.0000 | val loss 0.2606 bal_acc 0.9755 auc 0.9978 | 14s
+2026-10-10 10:11:04 | INFO    | src.train | [fold1-imagenet] epoch 14/30 | lr 6.08e-05 | train loss 0.2013 bal_acc 0.9984 | val loss 0.2250 bal_acc 0.9810 auc 0.9996 | 14s
+2026-10-10 10:11:19 | INFO    | src.train | [fold1-imagenet] epoch 15/30 | lr 5.57e-05 | train loss 0.1990 bal_acc 1.0000 | val loss 0.2425 bal_acc 0.9826 auc 0.9954 | 14s
+2026-10-10 10:11:33 | INFO    | src.train | [fold1-imagenet] epoch 16/30 | lr 5.05e-05 | train loss 0.1989 bal_acc 1.0000 | val loss 0.2426 bal_acc 0.9778 auc 0.9993 | 14s
+2026-10-10 10:11:47 | INFO    | src.train | [fold1-imagenet] epoch 17/30 | lr 4.53e-05 | train loss 0.1988 bal_acc 1.0000 | val loss 0.2553 bal_acc 0.9722 auc 0.9955 | 14s
+2026-10-10 10:12:01 | INFO    | src.train | [fold1-imagenet] epoch 18/30 | lr 4.02e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2501 bal_acc 0.9659 auc 0.9982 | 14s
+2026-10-10 10:12:16 | INFO    | src.train | [fold1-imagenet] epoch 19/30 | lr 3.52e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2415 bal_acc 0.9770 auc 0.9989 | 14s
+2026-10-10 10:12:30 | INFO    | src.train | [fold1-imagenet] epoch 20/30 | lr 3.04e-05 | train loss 0.1988 bal_acc 1.0000 | val loss 0.2561 bal_acc 0.9659 auc 0.9935 | 14s
+2026-10-10 10:12:44 | INFO    | src.train | [fold1-imagenet] epoch 21/30 | lr 2.58e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2509 bal_acc 0.9714 auc 0.9974 | 14s
+2026-10-10 10:12:58 | INFO    | src.train | [fold1-imagenet] epoch 22/30 | lr 2.14e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2455 bal_acc 0.9770 auc 0.9979 | 14s
+2026-10-10 10:13:12 | INFO    | src.train | [fold1-imagenet] epoch 23/30 | lr 1.74e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2435 bal_acc 0.9826 auc 0.9979 | 14s
+2026-10-10 10:13:26 | INFO    | src.train | [fold1-imagenet] epoch 24/30 | lr 1.37e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2425 bal_acc 0.9826 auc 0.9980 | 14s
+2026-10-10 10:13:40 | INFO    | src.train | [fold1-imagenet] epoch 25/30 | lr 1.05e-05 | train loss 0.2005 bal_acc 0.9984 | val loss 0.2545 bal_acc 0.9722 auc 0.9985 | 14s
+2026-10-10 10:13:54 | INFO    | src.train | [fold1-imagenet] epoch 26/30 | lr 7.63e-06 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2550 bal_acc 0.9722 auc 0.9984 | 14s
+2026-10-10 10:14:08 | INFO    | src.train | [fold1-imagenet] epoch 27/30 | lr 5.28e-06 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2524 bal_acc 0.9722 auc 0.9983 | 14s
+2026-10-10 10:14:22 | INFO    | src.train | [fold1-imagenet] epoch 28/30 | lr 3.42e-06 | train loss 0.1988 bal_acc 1.0000 | val loss 0.2412 bal_acc 0.9770 auc 0.9985 | 14s
+2026-10-10 10:14:36 | INFO    | src.train | [fold1-imagenet] epoch 29/30 | lr 2.08e-06 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2409 bal_acc 0.9770 auc 0.9986 | 14s
+2026-10-10 10:14:50 | INFO    | src.train | [fold1-imagenet] epoch 30/30 | lr 1.27e-06 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2410 bal_acc 0.9770 auc 0.9986 | 14s
+2026-10-10 10:14:50 | INFO    | src.train | [fold1-imagenet] best epoch 7 (val balanced accuracy 0.9944) -> /home/guido/Development/ML/progetto-itoLUNGs/results/cv/fold_1/imagenet/best_model.pt
+2026-10-10 10:14:58 | INFO    | src.train | [fold1-imagenet] TEST balanced accuracy 0.9601 | sens 0.9909 | spec 0.9293 | AUC 0.9937
+2026-10-10 10:14:58 | INFO    | src.train | --- fold1-lunghist | B) ImageNet -> LungHist700 -> Canine ---
+2026-10-10 10:14:58 | INFO    | src.model | Loaded LungHist700 weights from /home/guido/Development/ML/progetto-itoLUNGs/results/pretrain/best_lunghist700.pt (head re-initialised)
+2026-10-10 10:15:12 | INFO    | src.train | [fold1-lunghist] epoch 01/30 | lr 1.00e-04 | train loss 0.2952 bal_acc 0.9407 | val loss 0.2181 bal_acc 0.9889 auc 1.0000 | 14s  <- best
+2026-10-10 10:15:27 | INFO    | src.train | [fold1-lunghist] epoch 02/30 | lr 9.97e-05 | train loss 0.2287 bal_acc 0.9823 | val loss 0.2462 bal_acc 0.9778 auc 0.9994 | 14s
+2026-10-10 10:15:41 | INFO    | src.train | [fold1-lunghist] epoch 03/30 | lr 9.89e-05 | train loss 0.2188 bal_acc 0.9886 | val loss 0.2317 bal_acc 0.9833 auc 0.9996 | 14s
+2026-10-10 10:15:55 | INFO    | src.train | [fold1-lunghist] epoch 04/30 | lr 9.76e-05 | train loss 0.2060 bal_acc 0.9951 | val loss 0.2176 bal_acc 0.9944 auc 0.9996 | 14s  <- best
+2026-10-10 10:16:09 | INFO    | src.train | [fold1-lunghist] epoch 05/30 | lr 9.57e-05 | train loss 0.2035 bal_acc 0.9968 | val loss 0.2379 bal_acc 0.9889 auc 0.9836 | 14s
+2026-10-10 10:16:23 | INFO    | src.train | [fold1-lunghist] epoch 06/30 | lr 9.34e-05 | train loss 0.2036 bal_acc 0.9984 | val loss 0.2496 bal_acc 0.9770 auc 0.9775 | 14s
+2026-10-10 10:16:37 | INFO    | src.train | [fold1-lunghist] epoch 07/30 | lr 9.05e-05 | train loss 0.2046 bal_acc 0.9984 | val loss 0.2488 bal_acc 0.9762 auc 0.9983 | 14s
+2026-10-10 10:16:51 | INFO    | src.train | [fold1-lunghist] epoch 08/30 | lr 8.73e-05 | train loss 0.2047 bal_acc 0.9967 | val loss 0.2458 bal_acc 0.9810 auc 0.9812 | 14s
+2026-10-10 10:17:05 | INFO    | src.train | [fold1-lunghist] epoch 09/30 | lr 8.36e-05 | train loss 0.2142 bal_acc 0.9918 | val loss 0.3007 bal_acc 0.9565 auc 0.9558 | 14s
+2026-10-10 10:17:20 | INFO    | src.train | [fold1-lunghist] epoch 10/30 | lr 7.96e-05 | train loss 0.2073 bal_acc 0.9951 | val loss 0.2417 bal_acc 0.9833 auc 0.9911 | 14s
+2026-10-10 10:17:34 | INFO    | src.train | [fold1-lunghist] epoch 11/30 | lr 7.52e-05 | train loss 0.2013 bal_acc 0.9984 | val loss 0.2470 bal_acc 0.9707 auc 0.9883 | 14s
+2026-10-10 10:17:48 | INFO    | src.train | [fold1-lunghist] epoch 12/30 | lr 7.06e-05 | train loss 0.2028 bal_acc 0.9984 | val loss 0.2555 bal_acc 0.9778 auc 0.9776 | 14s
+2026-10-10 10:18:02 | INFO    | src.train | [fold1-lunghist] epoch 13/30 | lr 6.58e-05 | train loss 0.1999 bal_acc 1.0000 | val loss 0.2984 bal_acc 0.9611 auc 0.9658 | 14s
+2026-10-10 10:18:16 | INFO    | src.train | [fold1-lunghist] epoch 14/30 | lr 6.08e-05 | train loss 0.2024 bal_acc 0.9984 | val loss 0.2418 bal_acc 0.9833 auc 0.9778 | 14s
+2026-10-10 10:18:30 | INFO    | src.train | [fold1-lunghist] epoch 15/30 | lr 5.57e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2349 bal_acc 0.9833 auc 0.9986 | 14s
+2026-10-10 10:18:44 | INFO    | src.train | [fold1-lunghist] epoch 16/30 | lr 5.05e-05 | train loss 0.1988 bal_acc 1.0000 | val loss 0.2427 bal_acc 0.9833 auc 0.9970 | 14s
+2026-10-10 10:18:59 | INFO    | src.train | [fold1-lunghist] epoch 17/30 | lr 4.53e-05 | train loss 0.1988 bal_acc 1.0000 | val loss 0.2315 bal_acc 0.9833 auc 0.9989 | 14s
+2026-10-10 10:19:13 | INFO    | src.train | [fold1-lunghist] epoch 18/30 | lr 4.02e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2316 bal_acc 0.9833 auc 0.9993 | 14s
+2026-10-10 10:19:27 | INFO    | src.train | [fold1-lunghist] epoch 19/30 | lr 3.52e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2284 bal_acc 0.9833 auc 0.9994 | 14s
+2026-10-10 10:19:41 | INFO    | src.train | [fold1-lunghist] epoch 20/30 | lr 3.04e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2381 bal_acc 0.9833 auc 0.9985 | 14s
+2026-10-10 10:19:55 | INFO    | src.train | [fold1-lunghist] epoch 21/30 | lr 2.58e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2389 bal_acc 0.9833 auc 0.9954 | 14s
+2026-10-10 10:20:09 | INFO    | src.train | [fold1-lunghist] epoch 22/30 | lr 2.14e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2386 bal_acc 0.9833 auc 0.9970 | 14s
+2026-10-10 10:20:23 | INFO    | src.train | [fold1-lunghist] epoch 23/30 | lr 1.74e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2399 bal_acc 0.9833 auc 0.9883 | 14s
+2026-10-10 10:20:37 | INFO    | src.train | [fold1-lunghist] epoch 24/30 | lr 1.37e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2393 bal_acc 0.9833 auc 0.9920 | 14s
+2026-10-10 10:20:51 | INFO    | src.train | [fold1-lunghist] epoch 25/30 | lr 1.05e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2377 bal_acc 0.9833 auc 0.9985 | 14s
+2026-10-10 10:21:06 | INFO    | src.train | [fold1-lunghist] epoch 26/30 | lr 7.63e-06 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2377 bal_acc 0.9833 auc 0.9980 | 14s
+2026-10-10 10:21:20 | INFO    | src.train | [fold1-lunghist] epoch 27/30 | lr 5.28e-06 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2374 bal_acc 0.9833 auc 0.9984 | 15s
+2026-10-10 10:21:35 | INFO    | src.train | [fold1-lunghist] epoch 28/30 | lr 3.42e-06 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2373 bal_acc 0.9833 auc 0.9986 | 14s
+2026-10-10 10:21:49 | INFO    | src.train | [fold1-lunghist] epoch 29/30 | lr 2.08e-06 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2375 bal_acc 0.9833 auc 0.9983 | 15s
+2026-10-10 10:22:04 | INFO    | src.train | [fold1-lunghist] epoch 30/30 | lr 1.27e-06 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2375 bal_acc 0.9833 auc 0.9985 | 14s
+2026-10-10 10:22:04 | INFO    | src.train | [fold1-lunghist] best epoch 4 (val balanced accuracy 0.9944) -> /home/guido/Development/ML/progetto-itoLUNGs/results/cv/fold_1/lunghist/best_model.pt
+2026-10-10 10:22:11 | INFO    | src.train | [fold1-lunghist] TEST balanced accuracy 0.9697 | sens 1.0000 | spec 0.9394 | AUC 0.9901
+2026-10-10 10:22:24 | INFO    | src.gradcam | Grad-CAM fold 1: 8 images -> /home/guido/Development/ML/progetto-itoLUNGs/results/cv/fold_1/gradcam/comparison_fold1.png
+2026-10-10 10:22:24 | INFO    | src.train | === Fold 2/5 ===
+2026-10-10 10:22:24 | INFO    | src.train |   train 32 cases,  634 images (Normal=314, Neoplastic=320)
+2026-10-10 10:22:24 | INFO    | src.train |   val    9 cases,  169 images (Normal=79, Neoplastic=90)
+2026-10-10 10:22:24 | INFO    | src.train |   test   9 cases,  189 images (Normal=99, Neoplastic=90)
+2026-10-10 10:22:24 | INFO    | src.train | --- fold2-imagenet | A) ImageNet -> Canine ---
+2026-10-10 10:22:49 | INFO    | src.train | [fold2-imagenet] epoch 01/30 | lr 1.00e-04 | train loss 0.3105 bal_acc 0.9305 | val loss 0.2120 bal_acc 0.9937 auc 1.0000 | 25s  <- best
+2026-10-10 10:23:05 | INFO    | src.train | [fold2-imagenet] epoch 02/30 | lr 9.97e-05 | train loss 0.2417 bal_acc 0.9841 | val loss 0.2175 bal_acc 0.9873 auc 1.0000 | 16s
+2026-10-10 10:23:20 | INFO    | src.train | [fold2-imagenet] epoch 03/30 | lr 9.89e-05 | train loss 0.2150 bal_acc 0.9889 | val loss 0.2030 bal_acc 1.0000 auc 1.0000 | 15s  <- best
+2026-10-10 10:23:34 | INFO    | src.train | [fold2-imagenet] epoch 04/30 | lr 9.76e-05 | train loss 0.2062 bal_acc 0.9937 | val loss 0.2003 bal_acc 1.0000 auc 1.0000 | 14s  <- best
+2026-10-10 10:23:49 | INFO    | src.train | [fold2-imagenet] epoch 05/30 | lr 9.57e-05 | train loss 0.2167 bal_acc 0.9889 | val loss 0.2090 bal_acc 0.9944 auc 1.0000 | 15s
+2026-10-10 10:24:03 | INFO    | src.train | [fold2-imagenet] epoch 06/30 | lr 9.34e-05 | train loss 0.2055 bal_acc 0.9968 | val loss 0.2469 bal_acc 0.9747 auc 0.9980 | 14s
+2026-10-10 10:24:18 | INFO    | src.train | [fold2-imagenet] epoch 07/30 | lr 9.05e-05 | train loss 0.2015 bal_acc 0.9984 | val loss 0.2480 bal_acc 0.9778 auc 1.0000 | 14s
+2026-10-10 10:24:32 | INFO    | src.train | [fold2-imagenet] epoch 08/30 | lr 8.73e-05 | train loss 0.2119 bal_acc 0.9921 | val loss 0.2092 bal_acc 0.9944 auc 1.0000 | 14s
+2026-10-10 10:24:46 | INFO    | src.train | [fold2-imagenet] epoch 09/30 | lr 8.36e-05 | train loss 0.2037 bal_acc 0.9968 | val loss 0.2044 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:25:01 | INFO    | src.train | [fold2-imagenet] epoch 10/30 | lr 7.96e-05 | train loss 0.2007 bal_acc 0.9984 | val loss 0.2016 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:25:15 | INFO    | src.train | [fold2-imagenet] epoch 11/30 | lr 7.52e-05 | train loss 0.1990 bal_acc 1.0000 | val loss 0.1992 bal_acc 1.0000 auc 1.0000 | 14s  <- best
+2026-10-10 10:25:29 | INFO    | src.train | [fold2-imagenet] epoch 12/30 | lr 7.06e-05 | train loss 0.2142 bal_acc 0.9889 | val loss 0.2505 bal_acc 0.9747 auc 0.9976 | 14s
+2026-10-10 10:25:44 | INFO    | src.train | [fold2-imagenet] epoch 13/30 | lr 6.58e-05 | train loss 0.2003 bal_acc 1.0000 | val loss 0.1988 bal_acc 1.0000 auc 1.0000 | 15s  <- best
+2026-10-10 10:25:58 | INFO    | src.train | [fold2-imagenet] epoch 14/30 | lr 6.08e-05 | train loss 0.1997 bal_acc 0.9984 | val loss 0.2021 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:26:13 | INFO    | src.train | [fold2-imagenet] epoch 15/30 | lr 5.57e-05 | train loss 0.2001 bal_acc 0.9984 | val loss 0.2005 bal_acc 1.0000 auc 1.0000 | 15s
+2026-10-10 10:26:27 | INFO    | src.train | [fold2-imagenet] epoch 16/30 | lr 5.05e-05 | train loss 0.2014 bal_acc 0.9984 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s  <- best
+2026-10-10 10:26:41 | INFO    | src.train | [fold2-imagenet] epoch 17/30 | lr 4.53e-05 | train loss 0.1988 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:26:56 | INFO    | src.train | [fold2-imagenet] epoch 18/30 | lr 4.02e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:27:10 | INFO    | src.train | [fold2-imagenet] epoch 19/30 | lr 3.52e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:27:24 | INFO    | src.train | [fold2-imagenet] epoch 20/30 | lr 3.04e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s  <- best
+2026-10-10 10:27:38 | INFO    | src.train | [fold2-imagenet] epoch 21/30 | lr 2.58e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:27:53 | INFO    | src.train | [fold2-imagenet] epoch 22/30 | lr 2.14e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:28:07 | INFO    | src.train | [fold2-imagenet] epoch 23/30 | lr 1.74e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:28:21 | INFO    | src.train | [fold2-imagenet] epoch 24/30 | lr 1.37e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 15s  <- best
+2026-10-10 10:28:35 | INFO    | src.train | [fold2-imagenet] epoch 25/30 | lr 1.05e-05 | train loss 0.2026 bal_acc 0.9984 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:28:50 | INFO    | src.train | [fold2-imagenet] epoch 26/30 | lr 7.63e-06 | train loss 0.1988 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 15s
+2026-10-10 10:29:04 | INFO    | src.train | [fold2-imagenet] epoch 27/30 | lr 5.28e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:29:18 | INFO    | src.train | [fold2-imagenet] epoch 28/30 | lr 3.42e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:29:33 | INFO    | src.train | [fold2-imagenet] epoch 29/30 | lr 2.08e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:29:46 | INFO    | src.train | [fold2-imagenet] epoch 30/30 | lr 1.27e-06 | train loss 0.1994 bal_acc 0.9984 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:29:46 | INFO    | src.train | [fold2-imagenet] best epoch 24 (val balanced accuracy 1.0000) -> /home/guido/Development/ML/progetto-itoLUNGs/results/cv/fold_2/imagenet/best_model.pt
+2026-10-10 10:29:57 | INFO    | src.train | [fold2-imagenet] TEST balanced accuracy 0.9894 | sens 0.9889 | spec 0.9899 | AUC 0.9988
+2026-10-10 10:29:57 | INFO    | src.train | --- fold2-lunghist | B) ImageNet -> LungHist700 -> Canine ---
+2026-10-10 10:29:57 | INFO    | src.model | Loaded LungHist700 weights from /home/guido/Development/ML/progetto-itoLUNGs/results/pretrain/best_lunghist700.pt (head re-initialised)
+2026-10-10 10:30:12 | INFO    | src.train | [fold2-lunghist] epoch 01/30 | lr 1.00e-04 | train loss 0.3173 bal_acc 0.9228 | val loss 0.2266 bal_acc 0.9747 auc 0.9997 | 15s  <- best
+2026-10-10 10:30:26 | INFO    | src.train | [fold2-lunghist] epoch 02/30 | lr 9.97e-05 | train loss 0.2317 bal_acc 0.9825 | val loss 0.2482 bal_acc 0.9770 auc 0.9986 | 14s  <- best
+2026-10-10 10:30:40 | INFO    | src.train | [fold2-lunghist] epoch 03/30 | lr 9.89e-05 | train loss 0.2156 bal_acc 0.9921 | val loss 0.2447 bal_acc 0.9722 auc 1.0000 | 14s
+2026-10-10 10:30:55 | INFO    | src.train | [fold2-lunghist] epoch 04/30 | lr 9.76e-05 | train loss 0.2113 bal_acc 0.9921 | val loss 0.1992 bal_acc 1.0000 auc 1.0000 | 15s  <- best
+2026-10-10 10:31:09 | INFO    | src.train | [fold2-lunghist] epoch 05/30 | lr 9.57e-05 | train loss 0.2135 bal_acc 0.9921 | val loss 0.1994 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:31:23 | INFO    | src.train | [fold2-lunghist] epoch 06/30 | lr 9.34e-05 | train loss 0.2151 bal_acc 0.9889 | val loss 0.2151 bal_acc 0.9873 auc 0.9997 | 14s
+2026-10-10 10:31:37 | INFO    | src.train | [fold2-lunghist] epoch 07/30 | lr 9.05e-05 | train loss 0.2018 bal_acc 0.9984 | val loss 0.2012 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:31:51 | INFO    | src.train | [fold2-lunghist] epoch 08/30 | lr 8.73e-05 | train loss 0.2063 bal_acc 0.9953 | val loss 0.1992 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:32:06 | INFO    | src.train | [fold2-lunghist] epoch 09/30 | lr 8.36e-05 | train loss 0.2004 bal_acc 0.9984 | val loss 0.1998 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:32:20 | INFO    | src.train | [fold2-lunghist] epoch 10/30 | lr 7.96e-05 | train loss 0.2077 bal_acc 0.9937 | val loss 0.2000 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:32:34 | INFO    | src.train | [fold2-lunghist] epoch 11/30 | lr 7.52e-05 | train loss 0.2050 bal_acc 0.9968 | val loss 0.2044 bal_acc 0.9944 auc 1.0000 | 14s
+2026-10-10 10:32:48 | INFO    | src.train | [fold2-lunghist] epoch 12/30 | lr 7.06e-05 | train loss 0.2092 bal_acc 0.9921 | val loss 0.1999 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:33:02 | INFO    | src.train | [fold2-lunghist] epoch 13/30 | lr 6.58e-05 | train loss 0.2046 bal_acc 0.9984 | val loss 0.1987 bal_acc 1.0000 auc 1.0000 | 14s  <- best
+2026-10-10 10:33:17 | INFO    | src.train | [fold2-lunghist] epoch 14/30 | lr 6.08e-05 | train loss 0.2130 bal_acc 0.9921 | val loss 0.2008 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:33:31 | INFO    | src.train | [fold2-lunghist] epoch 15/30 | lr 5.57e-05 | train loss 0.1990 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s  <- best
+2026-10-10 10:33:46 | INFO    | src.train | [fold2-lunghist] epoch 16/30 | lr 5.05e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 15s  <- best
+2026-10-10 10:34:00 | INFO    | src.train | [fold2-lunghist] epoch 17/30 | lr 4.53e-05 | train loss 0.1994 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:34:14 | INFO    | src.train | [fold2-lunghist] epoch 18/30 | lr 4.02e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 15s
+2026-10-10 10:34:28 | INFO    | src.train | [fold2-lunghist] epoch 19/30 | lr 3.52e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s  <- best
+2026-10-10 10:34:43 | INFO    | src.train | [fold2-lunghist] epoch 20/30 | lr 3.04e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:34:57 | INFO    | src.train | [fold2-lunghist] epoch 21/30 | lr 2.58e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1987 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:35:11 | INFO    | src.train | [fold2-lunghist] epoch 22/30 | lr 2.14e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1987 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:35:25 | INFO    | src.train | [fold2-lunghist] epoch 23/30 | lr 1.74e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1987 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:35:39 | INFO    | src.train | [fold2-lunghist] epoch 24/30 | lr 1.37e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:35:53 | INFO    | src.train | [fold2-lunghist] epoch 25/30 | lr 1.05e-05 | train loss 0.2022 bal_acc 0.9984 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:36:08 | INFO    | src.train | [fold2-lunghist] epoch 26/30 | lr 7.63e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:36:22 | INFO    | src.train | [fold2-lunghist] epoch 27/30 | lr 5.28e-06 | train loss 0.1987 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:36:36 | INFO    | src.train | [fold2-lunghist] epoch 28/30 | lr 3.42e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:36:50 | INFO    | src.train | [fold2-lunghist] epoch 29/30 | lr 2.08e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:37:04 | INFO    | src.train | [fold2-lunghist] epoch 30/30 | lr 1.27e-06 | train loss 0.1989 bal_acc 1.0000 | val loss 0.1986 bal_acc 1.0000 auc 1.0000 | 14s  <- best
+2026-10-10 10:37:04 | INFO    | src.train | [fold2-lunghist] best epoch 30 (val balanced accuracy 1.0000) -> /home/guido/Development/ML/progetto-itoLUNGs/results/cv/fold_2/lunghist/best_model.pt
+2026-10-10 10:37:09 | INFO    | src.train | [fold2-lunghist] TEST balanced accuracy 0.9838 | sens 0.9778 | spec 0.9899 | AUC 0.9956
+2026-10-10 10:37:13 | INFO    | src.gradcam | Grad-CAM fold 2: 8 images -> /home/guido/Development/ML/progetto-itoLUNGs/results/cv/fold_2/gradcam/comparison_fold2.png
+2026-10-10 10:37:13 | INFO    | src.train | === Fold 3/5 ===
+2026-10-10 10:37:13 | INFO    | src.train |   train 32 cases,  633 images (Normal=313, Neoplastic=320)
+2026-10-10 10:37:13 | INFO    | src.train |   val    9 cases,  169 images (Normal=79, Neoplastic=90)
+2026-10-10 10:37:13 | INFO    | src.train |   test   9 cases,  190 images (Normal=100, Neoplastic=90)
+2026-10-10 10:37:13 | INFO    | src.train | --- fold3-imagenet | A) ImageNet -> Canine ---
+2026-10-10 10:37:35 | INFO    | src.train | [fold3-imagenet] epoch 01/30 | lr 1.00e-04 | train loss 0.3753 bal_acc 0.8827 | val loss 0.3132 bal_acc 0.9241 auc 0.9986 | 21s  <- best
+2026-10-10 10:37:49 | INFO    | src.train | [fold3-imagenet] epoch 02/30 | lr 9.97e-05 | train loss 0.2542 bal_acc 0.9715 | val loss 0.2148 bal_acc 0.9873 auc 1.0000 | 14s  <- best
+2026-10-10 10:38:03 | INFO    | src.train | [fold3-imagenet] epoch 03/30 | lr 9.89e-05 | train loss 0.2372 bal_acc 0.9762 | val loss 0.2214 bal_acc 0.9889 auc 0.9999 | 14s  <- best
+2026-10-10 10:38:18 | INFO    | src.train | [fold3-imagenet] epoch 04/30 | lr 9.76e-05 | train loss 0.2135 bal_acc 0.9921 | val loss 0.2254 bal_acc 0.9810 auc 1.0000 | 14s
+2026-10-10 10:38:32 | INFO    | src.train | [fold3-imagenet] epoch 05/30 | lr 9.57e-05 | train loss 0.2147 bal_acc 0.9905 | val loss 0.3160 bal_acc 0.9381 auc 0.9925 | 14s
+2026-10-10 10:38:46 | INFO    | src.train | [fold3-imagenet] epoch 06/30 | lr 9.34e-05 | train loss 0.2173 bal_acc 0.9905 | val loss 0.3330 bal_acc 0.9333 auc 0.9983 | 14s
+2026-10-10 10:39:01 | INFO    | src.train | [fold3-imagenet] epoch 07/30 | lr 9.05e-05 | train loss 0.2126 bal_acc 0.9921 | val loss 0.4342 bal_acc 0.9000 auc 1.0000 | 14s
+2026-10-10 10:39:15 | INFO    | src.train | [fold3-imagenet] epoch 08/30 | lr 8.73e-05 | train loss 0.2020 bal_acc 0.9984 | val loss 0.2451 bal_acc 0.9833 auc 0.9994 | 14s
+2026-10-10 10:39:29 | INFO    | src.train | [fold3-imagenet] epoch 09/30 | lr 8.36e-05 | train loss 0.2023 bal_acc 0.9968 | val loss 0.2334 bal_acc 0.9889 auc 0.9887 | 14s
+2026-10-10 10:39:44 | INFO    | src.train | [fold3-imagenet] epoch 10/30 | lr 7.96e-05 | train loss 0.2023 bal_acc 0.9984 | val loss 0.2436 bal_acc 0.9833 auc 0.9779 | 14s
+2026-10-10 10:39:58 | INFO    | src.train | [fold3-imagenet] epoch 11/30 | lr 7.52e-05 | train loss 0.2022 bal_acc 0.9969 | val loss 0.2430 bal_acc 0.9722 auc 1.0000 | 14s
+2026-10-10 10:40:13 | INFO    | src.train | [fold3-imagenet] epoch 12/30 | lr 7.06e-05 | train loss 0.2004 bal_acc 0.9984 | val loss 0.3696 bal_acc 0.9278 auc 0.9579 | 15s
+2026-10-10 10:40:27 | INFO    | src.train | [fold3-imagenet] epoch 13/30 | lr 6.58e-05 | train loss 0.2013 bal_acc 0.9984 | val loss 0.2018 bal_acc 1.0000 auc 1.0000 | 14s  <- best
+2026-10-10 10:40:41 | INFO    | src.train | [fold3-imagenet] epoch 14/30 | lr 6.08e-05 | train loss 0.2028 bal_acc 0.9968 | val loss 0.2720 bal_acc 0.9667 auc 0.9776 | 15s
+2026-10-10 10:40:56 | INFO    | src.train | [fold3-imagenet] epoch 15/30 | lr 5.57e-05 | train loss 0.2024 bal_acc 0.9984 | val loss 0.2159 bal_acc 0.9810 auc 1.0000 | 14s
+2026-10-10 10:41:10 | INFO    | src.train | [fold3-imagenet] epoch 16/30 | lr 5.05e-05 | train loss 0.2055 bal_acc 0.9968 | val loss 0.3822 bal_acc 0.9222 auc 0.9779 | 14s
+2026-10-10 10:41:25 | INFO    | src.train | [fold3-imagenet] epoch 17/30 | lr 4.53e-05 | train loss 0.1988 bal_acc 1.0000 | val loss 0.2205 bal_acc 0.9889 auc 0.9889 | 15s
+2026-10-10 10:41:39 | INFO    | src.train | [fold3-imagenet] epoch 18/30 | lr 4.02e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2042 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:41:54 | INFO    | src.train | [fold3-imagenet] epoch 19/30 | lr 3.52e-05 | train loss 0.1988 bal_acc 1.0000 | val loss 0.2029 bal_acc 0.9937 auc 1.0000 | 15s
+2026-10-10 10:42:08 | INFO    | src.train | [fold3-imagenet] epoch 20/30 | lr 3.04e-05 | train loss 0.2010 bal_acc 0.9984 | val loss 0.2098 bal_acc 0.9944 auc 1.0000 | 14s
+2026-10-10 10:42:22 | INFO    | src.train | [fold3-imagenet] epoch 21/30 | lr 2.58e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2015 bal_acc 1.0000 auc 1.0000 | 14s  <- best
+2026-10-10 10:42:36 | INFO    | src.train | [fold3-imagenet] epoch 22/30 | lr 2.14e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2007 bal_acc 1.0000 auc 1.0000 | 14s  <- best
+2026-10-10 10:42:51 | INFO    | src.train | [fold3-imagenet] epoch 23/30 | lr 1.74e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2001 bal_acc 1.0000 auc 1.0000 | 15s  <- best
+2026-10-10 10:43:06 | INFO    | src.train | [fold3-imagenet] epoch 24/30 | lr 1.37e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2005 bal_acc 1.0000 auc 1.0000 | 15s
+2026-10-10 10:43:20 | INFO    | src.train | [fold3-imagenet] epoch 25/30 | lr 1.05e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.1993 bal_acc 1.0000 auc 1.0000 | 14s  <- best
+2026-10-10 10:43:34 | INFO    | src.train | [fold3-imagenet] epoch 26/30 | lr 7.63e-06 | train loss 0.1987 bal_acc 1.0000 | val loss 0.1997 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:43:48 | INFO    | src.train | [fold3-imagenet] epoch 27/30 | lr 5.28e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2006 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:44:03 | INFO    | src.train | [fold3-imagenet] epoch 28/30 | lr 3.42e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2025 bal_acc 0.9944 auc 1.0000 | 14s
+2026-10-10 10:44:17 | INFO    | src.train | [fold3-imagenet] epoch 29/30 | lr 2.08e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2024 bal_acc 0.9944 auc 1.0000 | 14s
+2026-10-10 10:44:31 | INFO    | src.train | [fold3-imagenet] epoch 30/30 | lr 1.27e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2031 bal_acc 0.9944 auc 1.0000 | 15s
+2026-10-10 10:44:31 | INFO    | src.train | [fold3-imagenet] best epoch 25 (val balanced accuracy 1.0000) -> /home/guido/Development/ML/progetto-itoLUNGs/results/cv/fold_3/imagenet/best_model.pt
+2026-10-10 10:44:36 | INFO    | src.train | [fold3-imagenet] TEST balanced accuracy 0.9450 | sens 0.9000 | spec 0.9900 | AUC 0.9916
+2026-10-10 10:44:36 | INFO    | src.train | --- fold3-lunghist | B) ImageNet -> LungHist700 -> Canine ---
+2026-10-10 10:44:36 | INFO    | src.model | Loaded LungHist700 weights from /home/guido/Development/ML/progetto-itoLUNGs/results/pretrain/best_lunghist700.pt (head re-initialised)
+2026-10-10 10:44:51 | INFO    | src.train | [fold3-lunghist] epoch 01/30 | lr 1.00e-04 | train loss 0.3164 bal_acc 0.9493 | val loss 0.2430 bal_acc 0.9747 auc 0.9966 | 14s  <- best
+2026-10-10 10:45:05 | INFO    | src.train | [fold3-lunghist] epoch 02/30 | lr 9.97e-05 | train loss 0.2378 bal_acc 0.9747 | val loss 0.2178 bal_acc 0.9881 auc 0.9996 | 14s  <- best
+2026-10-10 10:45:19 | INFO    | src.train | [fold3-lunghist] epoch 03/30 | lr 9.89e-05 | train loss 0.2259 bal_acc 0.9889 | val loss 0.2434 bal_acc 0.9747 auc 1.0000 | 14s
+2026-10-10 10:45:34 | INFO    | src.train | [fold3-lunghist] epoch 04/30 | lr 9.76e-05 | train loss 0.2397 bal_acc 0.9810 | val loss 0.2157 bal_acc 0.9881 auc 0.9996 | 14s  <- best
+2026-10-10 10:45:48 | INFO    | src.train | [fold3-lunghist] epoch 05/30 | lr 9.57e-05 | train loss 0.2054 bal_acc 0.9968 | val loss 0.2830 bal_acc 0.9556 auc 0.9997 | 14s
+2026-10-10 10:46:03 | INFO    | src.train | [fold3-lunghist] epoch 06/30 | lr 9.34e-05 | train loss 0.2175 bal_acc 0.9890 | val loss 0.2417 bal_acc 0.9833 auc 0.9975 | 15s
+2026-10-10 10:46:17 | INFO    | src.train | [fold3-lunghist] epoch 07/30 | lr 9.05e-05 | train loss 0.2117 bal_acc 0.9921 | val loss 0.2887 bal_acc 0.9556 auc 1.0000 | 14s
+2026-10-10 10:46:31 | INFO    | src.train | [fold3-lunghist] epoch 08/30 | lr 8.73e-05 | train loss 0.2109 bal_acc 0.9905 | val loss 0.2039 bal_acc 0.9937 auc 1.0000 | 14s  <- best
+2026-10-10 10:46:46 | INFO    | src.train | [fold3-lunghist] epoch 09/30 | lr 8.36e-05 | train loss 0.2089 bal_acc 0.9936 | val loss 0.1987 bal_acc 1.0000 auc 1.0000 | 15s  <- best
+2026-10-10 10:47:00 | INFO    | src.train | [fold3-lunghist] epoch 10/30 | lr 7.96e-05 | train loss 0.2071 bal_acc 0.9968 | val loss 0.1988 bal_acc 1.0000 auc 1.0000 | 15s
+2026-10-10 10:47:15 | INFO    | src.train | [fold3-lunghist] epoch 11/30 | lr 7.52e-05 | train loss 0.2030 bal_acc 0.9968 | val loss 0.2036 bal_acc 0.9937 auc 1.0000 | 14s
+2026-10-10 10:47:29 | INFO    | src.train | [fold3-lunghist] epoch 12/30 | lr 7.06e-05 | train loss 0.2006 bal_acc 0.9984 | val loss 0.2573 bal_acc 0.9778 auc 0.9996 | 14s
+2026-10-10 10:47:44 | INFO    | src.train | [fold3-lunghist] epoch 13/30 | lr 6.58e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2116 bal_acc 0.9937 auc 1.0000 | 14s
+2026-10-10 10:47:58 | INFO    | src.train | [fold3-lunghist] epoch 14/30 | lr 6.08e-05 | train loss 0.2035 bal_acc 0.9968 | val loss 0.2004 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:48:13 | INFO    | src.train | [fold3-lunghist] epoch 15/30 | lr 5.57e-05 | train loss 0.2016 bal_acc 0.9968 | val loss 0.2237 bal_acc 0.9873 auc 0.9997 | 15s
+2026-10-10 10:48:27 | INFO    | src.train | [fold3-lunghist] epoch 16/30 | lr 5.05e-05 | train loss 0.2032 bal_acc 0.9953 | val loss 0.2091 bal_acc 0.9889 auc 1.0000 | 14s
+2026-10-10 10:48:41 | INFO    | src.train | [fold3-lunghist] epoch 17/30 | lr 4.53e-05 | train loss 0.2001 bal_acc 0.9984 | val loss 0.2058 bal_acc 0.9889 auc 1.0000 | 14s
+2026-10-10 10:48:55 | INFO    | src.train | [fold3-lunghist] epoch 18/30 | lr 4.02e-05 | train loss 0.1996 bal_acc 0.9984 | val loss 0.2653 bal_acc 0.9667 auc 1.0000 | 15s
+2026-10-10 10:49:10 | INFO    | src.train | [fold3-lunghist] epoch 19/30 | lr 3.52e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.1995 bal_acc 1.0000 auc 1.0000 | 15s
+2026-10-10 10:49:24 | INFO    | src.train | [fold3-lunghist] epoch 20/30 | lr 3.04e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2161 bal_acc 0.9889 auc 1.0000 | 14s
+2026-10-10 10:49:39 | INFO    | src.train | [fold3-lunghist] epoch 21/30 | lr 2.58e-05 | train loss 0.1988 bal_acc 1.0000 | val loss 0.2604 bal_acc 0.9722 auc 1.0000 | 15s
+2026-10-10 10:49:54 | INFO    | src.train | [fold3-lunghist] epoch 22/30 | lr 2.14e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2131 bal_acc 0.9889 auc 1.0000 | 15s
+2026-10-10 10:50:08 | INFO    | src.train | [fold3-lunghist] epoch 23/30 | lr 1.74e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2041 bal_acc 0.9944 auc 1.0000 | 15s
+2026-10-10 10:50:23 | INFO    | src.train | [fold3-lunghist] epoch 24/30 | lr 1.37e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2033 bal_acc 1.0000 auc 1.0000 | 15s
+2026-10-10 10:50:37 | INFO    | src.train | [fold3-lunghist] epoch 25/30 | lr 1.05e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2025 bal_acc 1.0000 auc 1.0000 | 14s
+2026-10-10 10:50:52 | INFO    | src.train | [fold3-lunghist] epoch 26/30 | lr 7.63e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2035 bal_acc 1.0000 auc 1.0000 | 15s
+2026-10-10 10:51:06 | INFO    | src.train | [fold3-lunghist] epoch 27/30 | lr 5.28e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2044 bal_acc 0.9944 auc 1.0000 | 14s
+2026-10-10 10:51:20 | INFO    | src.train | [fold3-lunghist] epoch 28/30 | lr 3.42e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2171 bal_acc 0.9833 auc 1.0000 | 14s
+2026-10-10 10:51:35 | INFO    | src.train | [fold3-lunghist] epoch 29/30 | lr 2.08e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2159 bal_acc 0.9833 auc 1.0000 | 14s
+2026-10-10 10:51:49 | INFO    | src.train | [fold3-lunghist] epoch 30/30 | lr 1.27e-06 | train loss 0.1989 bal_acc 1.0000 | val loss 0.2099 bal_acc 0.9889 auc 1.0000 | 14s
+2026-10-10 10:51:49 | INFO    | src.train | [fold3-lunghist] best epoch 9 (val balanced accuracy 1.0000) -> /home/guido/Development/ML/progetto-itoLUNGs/results/cv/fold_3/lunghist/best_model.pt
+2026-10-10 10:51:54 | INFO    | src.train | [fold3-lunghist] TEST balanced accuracy 0.9778 | sens 0.9556 | spec 1.0000 | AUC 0.9894
+2026-10-10 10:51:58 | INFO    | src.gradcam | Grad-CAM fold 3: 8 images -> /home/guido/Development/ML/progetto-itoLUNGs/results/cv/fold_3/gradcam/comparison_fold3.png
+2026-10-10 10:51:58 | INFO    | src.train | === Fold 4/5 ===
+2026-10-10 10:51:58 | INFO    | src.train |   train 30 cases,  614 images (Normal=314, Neoplastic=300)
+2026-10-10 10:51:58 | INFO    | src.train |   val    9 cases,  169 images (Normal=79, Neoplastic=90)
+2026-10-10 10:51:58 | INFO    | src.train |   test  11 cases,  209 images (Normal=99, Neoplastic=110)
+2026-10-10 10:51:58 | INFO    | src.train | --- fold4-imagenet | A) ImageNet -> Canine ---
+2026-10-10 10:52:13 | INFO    | src.train | [fold4-imagenet] epoch 01/30 | lr 1.00e-04 | train loss 0.3362 bal_acc 0.9069 | val loss 0.2785 bal_acc 0.9517 auc 0.9910 | 14s  <- best
+2026-10-10 10:52:27 | INFO    | src.train | [fold4-imagenet] epoch 02/30 | lr 9.97e-05 | train loss 0.2312 bal_acc 0.9805 | val loss 0.2723 bal_acc 0.9620 auc 0.9676 | 14s  <- best
+2026-10-10 10:52:41 | INFO    | src.train | [fold4-imagenet] epoch 03/30 | lr 9.89e-05 | train loss 0.2304 bal_acc 0.9789 | val loss 0.2496 bal_acc 0.9722 auc 0.9987 | 14s  <- best
+2026-10-10 10:52:55 | INFO    | src.train | [fold4-imagenet] epoch 04/30 | lr 9.76e-05 | train loss 0.2250 bal_acc 0.9823 | val loss 0.6269 bal_acc 0.7944 auc 0.8735 | 14s
+2026-10-10 10:53:09 | INFO    | src.train | [fold4-imagenet] epoch 05/30 | lr 9.57e-05 | train loss 0.2448 bal_acc 0.9724 | val loss 0.3427 bal_acc 0.9381 auc 0.9952 | 14s
+2026-10-10 10:53:24 | INFO    | src.train | [fold4-imagenet] epoch 06/30 | lr 9.34e-05 | train loss 0.2092 bal_acc 0.9935 | val loss 0.3038 bal_acc 0.9421 auc 0.9738 | 14s
+2026-10-10 10:53:38 | INFO    | src.train | [fold4-imagenet] epoch 07/30 | lr 9.05e-05 | train loss 0.2029 bal_acc 0.9984 | val loss 0.3598 bal_acc 0.9444 auc 0.9108 | 14s
+2026-10-10 10:53:52 | INFO    | src.train | [fold4-imagenet] epoch 08/30 | lr 8.73e-05 | train loss 0.2098 bal_acc 0.9936 | val loss 0.3678 bal_acc 0.9278 auc 0.9983 | 14s
+2026-10-10 10:54:06 | INFO    | src.train | [fold4-imagenet] epoch 09/30 | lr 8.36e-05 | train loss 0.2081 bal_acc 0.9951 | val loss 0.2815 bal_acc 0.9437 auc 0.9986 | 14s
+2026-10-10 10:54:20 | INFO    | src.train | [fold4-imagenet] epoch 10/30 | lr 7.96e-05 | train loss 0.2015 bal_acc 0.9983 | val loss 0.3217 bal_acc 0.9222 auc 0.9990 | 14s
+2026-10-10 10:54:34 | INFO    | src.train | [fold4-imagenet] epoch 11/30 | lr 7.52e-05 | train loss 0.1994 bal_acc 1.0000 | val loss 0.2809 bal_acc 0.9611 auc 0.9993 | 14s
+2026-10-10 10:54:49 | INFO    | src.train | [fold4-imagenet] epoch 12/30 | lr 7.06e-05 | train loss 0.2028 bal_acc 0.9984 | val loss 0.2375 bal_acc 0.9818 auc 0.9940 | 14s  <- best
+2026-10-10 10:55:03 | INFO    | src.train | [fold4-imagenet] epoch 13/30 | lr 6.58e-05 | train loss 0.2018 bal_acc 0.9984 | val loss 0.2678 bal_acc 0.9596 auc 0.9976 | 14s
+2026-10-10 10:55:17 | INFO    | src.train | [fold4-imagenet] epoch 14/30 | lr 6.08e-05 | train loss 0.2003 bal_acc 0.9983 | val loss 0.3476 bal_acc 0.9333 auc 0.9964 | 14s
+2026-10-10 10:55:31 | INFO    | src.train | [fold4-imagenet] epoch 15/30 | lr 5.57e-05 | train loss 0.2074 bal_acc 0.9951 | val loss 0.2581 bal_acc 0.9620 auc 0.9766 | 14s
+2026-10-10 10:55:45 | INFO    | src.train | [fold4-imagenet] epoch 16/30 | lr 5.05e-05 | train loss 0.1996 bal_acc 1.0000 | val loss 0.3185 bal_acc 0.9444 auc 0.9977 | 14s
+2026-10-10 10:56:00 | INFO    | src.train | [fold4-imagenet] epoch 17/30 | lr 4.53e-05 | train loss 0.2033 bal_acc 0.9983 | val loss 0.2494 bal_acc 0.9659 auc 0.9993 | 15s
+2026-10-10 10:56:14 | INFO    | src.train | [fold4-imagenet] epoch 18/30 | lr 4.02e-05 | train loss 0.2023 bal_acc 0.9967 | val loss 0.2952 bal_acc 0.9437 auc 0.9987 | 15s
+2026-10-10 10:56:29 | INFO    | src.train | [fold4-imagenet] epoch 19/30 | lr 3.52e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2968 bal_acc 0.9437 auc 0.9987 | 15s
+2026-10-10 10:56:45 | INFO    | src.train | [fold4-imagenet] epoch 20/30 | lr 3.04e-05 | train loss 0.1988 bal_acc 1.0000 | val loss 0.2891 bal_acc 0.9548 auc 0.9985 | 16s
+2026-10-10 10:57:01 | INFO    | src.train | [fold4-imagenet] epoch 21/30 | lr 2.58e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.3131 bal_acc 0.9437 auc 0.9979 | 16s
+2026-10-10 10:57:16 | INFO    | src.train | [fold4-imagenet] epoch 22/30 | lr 2.14e-05 | train loss 0.2016 bal_acc 0.9968 | val loss 0.3091 bal_acc 0.9437 auc 0.9987 | 15s
+2026-10-10 10:57:31 | INFO    | src.train | [fold4-imagenet] epoch 23/30 | lr 1.74e-05 | train loss 0.1988 bal_acc 1.0000 | val loss 0.2772 bal_acc 0.9548 auc 0.9987 | 15s
+2026-10-10 10:57:46 | INFO    | src.train | [fold4-imagenet] epoch 24/30 | lr 1.37e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2811 bal_acc 0.9548 auc 0.9987 | 15s
+2026-10-10 10:58:02 | INFO    | src.train | [fold4-imagenet] epoch 25/30 | lr 1.05e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2923 bal_acc 0.9492 auc 0.9987 | 16s
+2026-10-10 10:58:16 | INFO    | src.train | [fold4-imagenet] epoch 26/30 | lr 7.63e-06 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2905 bal_acc 0.9492 auc 0.9987 | 14s
+2026-10-10 10:58:31 | INFO    | src.train | [fold4-imagenet] epoch 27/30 | lr 5.28e-06 | train loss 0.1989 bal_acc 1.0000 | val loss 0.2977 bal_acc 0.9437 auc 0.9987 | 15s
+2026-10-10 10:58:45 | INFO    | src.train | [fold4-imagenet] epoch 28/30 | lr 3.42e-06 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2993 bal_acc 0.9437 auc 0.9987 | 14s
+2026-10-10 10:59:00 | INFO    | src.train | [fold4-imagenet] epoch 29/30 | lr 2.08e-06 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2980 bal_acc 0.9437 auc 0.9987 | 15s
+2026-10-10 10:59:15 | INFO    | src.train | [fold4-imagenet] epoch 30/30 | lr 1.27e-06 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2975 bal_acc 0.9437 auc 0.9987 | 15s
+2026-10-10 10:59:15 | INFO    | src.train | [fold4-imagenet] best epoch 12 (val balanced accuracy 0.9818) -> /home/guido/Development/ML/progetto-itoLUNGs/results/cv/fold_4/imagenet/best_model.pt
+2026-10-10 10:59:20 | INFO    | src.train | [fold4-imagenet] TEST balanced accuracy 0.9798 | sens 1.0000 | spec 0.9596 | AUC 0.9998
+2026-10-10 10:59:20 | INFO    | src.train | --- fold4-lunghist | B) ImageNet -> LungHist700 -> Canine ---
+2026-10-10 10:59:21 | INFO    | src.model | Loaded LungHist700 weights from /home/guido/Development/ML/progetto-itoLUNGs/results/pretrain/best_lunghist700.pt (head re-initialised)
+2026-10-10 10:59:36 | INFO    | src.train | [fold4-lunghist] epoch 01/30 | lr 1.00e-04 | train loss 0.3211 bal_acc 0.9115 | val loss 0.3709 bal_acc 0.9056 auc 0.9876 | 15s  <- best
+2026-10-10 10:59:52 | INFO    | src.train | [fold4-lunghist] epoch 02/30 | lr 9.97e-05 | train loss 0.2219 bal_acc 0.9869 | val loss 0.2069 bal_acc 1.0000 auc 1.0000 | 16s  <- best
+2026-10-10 11:00:07 | INFO    | src.train | [fold4-lunghist] epoch 03/30 | lr 9.89e-05 | train loss 0.2269 bal_acc 0.9871 | val loss 0.2524 bal_acc 0.9699 auc 0.9910 | 16s
+2026-10-10 11:00:23 | INFO    | src.train | [fold4-lunghist] epoch 04/30 | lr 9.76e-05 | train loss 0.2186 bal_acc 0.9904 | val loss 0.4414 bal_acc 0.9167 auc 0.8920 | 16s
+2026-10-10 11:00:39 | INFO    | src.train | [fold4-lunghist] epoch 05/30 | lr 9.57e-05 | train loss 0.2458 bal_acc 0.9773 | val loss 0.2977 bal_acc 0.9548 auc 0.9966 | 16s
+2026-10-10 11:00:54 | INFO    | src.train | [fold4-lunghist] epoch 06/30 | lr 9.34e-05 | train loss 0.2163 bal_acc 0.9919 | val loss 0.2732 bal_acc 0.9611 auc 1.0000 | 15s
+2026-10-10 11:01:09 | INFO    | src.train | [fold4-lunghist] epoch 07/30 | lr 9.05e-05 | train loss 0.2060 bal_acc 0.9967 | val loss 0.2416 bal_acc 0.9722 auc 0.9996 | 15s
+2026-10-10 11:01:25 | INFO    | src.train | [fold4-lunghist] epoch 08/30 | lr 8.73e-05 | train loss 0.2027 bal_acc 0.9984 | val loss 0.3564 bal_acc 0.9389 auc 0.9295 | 15s
+2026-10-10 11:01:40 | INFO    | src.train | [fold4-lunghist] epoch 09/30 | lr 8.36e-05 | train loss 0.2068 bal_acc 0.9951 | val loss 0.3607 bal_acc 0.9214 auc 0.9484 | 15s
+2026-10-10 11:01:54 | INFO    | src.train | [fold4-lunghist] epoch 10/30 | lr 7.96e-05 | train loss 0.2024 bal_acc 0.9984 | val loss 0.2394 bal_acc 0.9707 auc 0.9980 | 15s
+2026-10-10 11:02:09 | INFO    | src.train | [fold4-lunghist] epoch 11/30 | lr 7.52e-05 | train loss 0.2033 bal_acc 0.9983 | val loss 0.3044 bal_acc 0.9500 auc 0.9979 | 15s
+2026-10-10 11:02:23 | INFO    | src.train | [fold4-lunghist] epoch 12/30 | lr 7.06e-05 | train loss 0.2011 bal_acc 0.9984 | val loss 0.2253 bal_acc 0.9873 auc 0.9987 | 14s
+2026-10-10 11:02:38 | INFO    | src.train | [fold4-lunghist] epoch 13/30 | lr 6.58e-05 | train loss 0.2024 bal_acc 0.9967 | val loss 0.3093 bal_acc 0.9500 auc 0.9900 | 15s
+2026-10-10 11:02:52 | INFO    | src.train | [fold4-lunghist] epoch 14/30 | lr 6.08e-05 | train loss 0.2040 bal_acc 0.9967 | val loss 0.3184 bal_acc 0.9437 auc 0.9977 | 14s
+2026-10-10 11:03:06 | INFO    | src.train | [fold4-lunghist] epoch 15/30 | lr 5.57e-05 | train loss 0.2066 bal_acc 0.9951 | val loss 0.2590 bal_acc 0.9651 auc 0.9972 | 14s
+2026-10-10 11:03:20 | INFO    | src.train | [fold4-lunghist] epoch 16/30 | lr 5.05e-05 | train loss 0.1988 bal_acc 1.0000 | val loss 0.2937 bal_acc 0.9667 auc 0.9994 | 14s
+2026-10-10 11:03:34 | INFO    | src.train | [fold4-lunghist] epoch 17/30 | lr 4.53e-05 | train loss 0.1990 bal_acc 1.0000 | val loss 0.2344 bal_acc 0.9826 auc 0.9950 | 14s
+2026-10-10 11:03:48 | INFO    | src.train | [fold4-lunghist] epoch 18/30 | lr 4.02e-05 | train loss 0.1995 bal_acc 1.0000 | val loss 0.2546 bal_acc 0.9714 auc 0.9909 | 14s
+2026-10-10 11:04:02 | INFO    | src.train | [fold4-lunghist] epoch 19/30 | lr 3.52e-05 | train loss 0.1988 bal_acc 1.0000 | val loss 0.2919 bal_acc 0.9548 auc 0.9973 | 14s
+2026-10-10 11:04:16 | INFO    | src.train | [fold4-lunghist] epoch 20/30 | lr 3.04e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2887 bal_acc 0.9548 auc 0.9975 | 14s
+2026-10-10 11:04:31 | INFO    | src.train | [fold4-lunghist] epoch 21/30 | lr 2.58e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2779 bal_acc 0.9603 auc 0.9971 | 14s
+2026-10-10 11:04:46 | INFO    | src.train | [fold4-lunghist] epoch 22/30 | lr 2.14e-05 | train loss 0.2004 bal_acc 0.9984 | val loss 0.3111 bal_acc 0.9492 auc 0.9985 | 16s
+2026-10-10 11:05:01 | INFO    | src.train | [fold4-lunghist] epoch 23/30 | lr 1.74e-05 | train loss 0.1989 bal_acc 1.0000 | val loss 0.2772 bal_acc 0.9603 auc 0.9976 | 15s
+2026-10-10 11:05:15 | INFO    | src.train | [fold4-lunghist] epoch 24/30 | lr 1.37e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2786 bal_acc 0.9603 auc 0.9977 | 14s
+2026-10-10 11:05:30 | INFO    | src.train | [fold4-lunghist] epoch 25/30 | lr 1.05e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2811 bal_acc 0.9603 auc 0.9980 | 15s
+2026-10-10 11:05:45 | INFO    | src.train | [fold4-lunghist] epoch 26/30 | lr 7.63e-06 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2815 bal_acc 0.9603 auc 0.9980 | 15s
+2026-10-10 11:06:01 | INFO    | src.train | [fold4-lunghist] epoch 27/30 | lr 5.28e-06 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2829 bal_acc 0.9603 auc 0.9980 | 16s
+2026-10-10 11:06:15 | INFO    | src.train | [fold4-lunghist] epoch 28/30 | lr 3.42e-06 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2830 bal_acc 0.9603 auc 0.9980 | 14s
+2026-10-10 11:06:30 | INFO    | src.train | [fold4-lunghist] epoch 29/30 | lr 2.08e-06 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2895 bal_acc 0.9603 auc 0.9982 | 15s
+2026-10-10 11:06:45 | INFO    | src.train | [fold4-lunghist] epoch 30/30 | lr 1.27e-06 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2893 bal_acc 0.9603 auc 0.9982 | 15s
+2026-10-10 11:06:45 | INFO    | src.train | [fold4-lunghist] best epoch 2 (val balanced accuracy 1.0000) -> /home/guido/Development/ML/progetto-itoLUNGs/results/cv/fold_4/lunghist/best_model.pt
+2026-10-10 11:06:50 | INFO    | src.train | [fold4-lunghist] TEST balanced accuracy 0.9899 | sens 1.0000 | spec 0.9798 | AUC 0.9999
+2026-10-10 11:06:55 | INFO    | src.gradcam | Grad-CAM fold 4: 8 images -> /home/guido/Development/ML/progetto-itoLUNGs/results/cv/fold_4/gradcam/comparison_fold4.png
+2026-10-10 11:06:55 | INFO    | src.train | === Fold 5/5 ===
+2026-10-10 11:06:55 | INFO    | src.train |   train 31 cases,  628 images (Normal=318, Neoplastic=310)
+2026-10-10 11:06:55 | INFO    | src.train |   val    9 cases,  169 images (Normal=79, Neoplastic=90)
+2026-10-10 11:06:55 | INFO    | src.train |   test  10 cases,  195 images (Normal=95, Neoplastic=100)
+2026-10-10 11:06:55 | INFO    | src.train | --- fold5-imagenet | A) ImageNet -> Canine ---
+2026-10-10 11:07:17 | INFO    | src.train | [fold5-imagenet] epoch 01/30 | lr 1.00e-04 | train loss 0.3050 bal_acc 0.9414 | val loss 0.3259 bal_acc 0.9137 auc 0.9737 | 22s  <- best
+2026-10-10 11:07:32 | INFO    | src.train | [fold5-imagenet] epoch 02/30 | lr 9.97e-05 | train loss 0.2336 bal_acc 0.9826 | val loss 0.2906 bal_acc 0.9383 auc 0.9911 | 15s  <- best
+2026-10-10 11:07:46 | INFO    | src.train | [fold5-imagenet] epoch 03/30 | lr 9.89e-05 | train loss 0.2167 bal_acc 0.9856 | val loss 0.2944 bal_acc 0.9295 auc 0.9920 | 14s
+2026-10-10 11:08:01 | INFO    | src.train | [fold5-imagenet] epoch 04/30 | lr 9.76e-05 | train loss 0.2213 bal_acc 0.9889 | val loss 0.2997 bal_acc 0.9383 auc 0.9906 | 15s
+2026-10-10 11:08:16 | INFO    | src.train | [fold5-imagenet] epoch 05/30 | lr 9.57e-05 | train loss 0.2149 bal_acc 0.9920 | val loss 0.2687 bal_acc 0.9540 auc 0.9954 | 15s  <- best
+2026-10-10 11:08:31 | INFO    | src.train | [fold5-imagenet] epoch 06/30 | lr 9.34e-05 | train loss 0.2135 bal_acc 0.9921 | val loss 0.2587 bal_acc 0.9707 auc 0.9969 | 15s  <- best
+2026-10-10 11:08:45 | INFO    | src.train | [fold5-imagenet] epoch 07/30 | lr 9.05e-05 | train loss 0.2114 bal_acc 0.9936 | val loss 0.2599 bal_acc 0.9557 auc 0.9969 | 14s
+2026-10-10 11:08:59 | INFO    | src.train | [fold5-imagenet] epoch 08/30 | lr 8.73e-05 | train loss 0.2019 bal_acc 1.0000 | val loss 0.2611 bal_acc 0.9620 auc 0.9949 | 14s
+2026-10-10 11:09:14 | INFO    | src.train | [fold5-imagenet] epoch 09/30 | lr 8.36e-05 | train loss 0.2058 bal_acc 0.9968 | val loss 0.3684 bal_acc 0.9177 auc 0.9927 | 14s
+2026-10-10 11:09:28 | INFO    | src.train | [fold5-imagenet] epoch 10/30 | lr 7.96e-05 | train loss 0.2042 bal_acc 0.9969 | val loss 0.2263 bal_acc 0.9747 auc 0.9990 | 14s  <- best
+2026-10-10 11:09:42 | INFO    | src.train | [fold5-imagenet] epoch 11/30 | lr 7.52e-05 | train loss 0.1996 bal_acc 1.0000 | val loss 0.2232 bal_acc 0.9747 auc 1.0000 | 14s  <- best
+2026-10-10 11:09:56 | INFO    | src.train | [fold5-imagenet] epoch 12/30 | lr 7.06e-05 | train loss 0.1988 bal_acc 1.0000 | val loss 0.2483 bal_acc 0.9684 auc 0.9997 | 14s
+2026-10-10 11:10:11 | INFO    | src.train | [fold5-imagenet] epoch 13/30 | lr 6.58e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2480 bal_acc 0.9747 auc 0.9997 | 14s
+2026-10-10 11:10:25 | INFO    | src.train | [fold5-imagenet] epoch 14/30 | lr 6.08e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2254 bal_acc 0.9810 auc 0.9994 | 14s  <- best
+2026-10-10 11:10:39 | INFO    | src.train | [fold5-imagenet] epoch 15/30 | lr 5.57e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2588 bal_acc 0.9747 auc 0.9993 | 14s
+2026-10-10 11:10:53 | INFO    | src.train | [fold5-imagenet] epoch 16/30 | lr 5.05e-05 | train loss 0.2029 bal_acc 0.9984 | val loss 0.2285 bal_acc 0.9699 auc 0.9989 | 14s
+2026-10-10 11:11:08 | INFO    | src.train | [fold5-imagenet] epoch 17/30 | lr 4.53e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2464 bal_acc 0.9684 auc 0.9994 | 14s
+2026-10-10 11:11:22 | INFO    | src.train | [fold5-imagenet] epoch 18/30 | lr 4.02e-05 | train loss 0.1999 bal_acc 0.9984 | val loss 0.2365 bal_acc 0.9714 auc 0.9982 | 14s
+2026-10-10 11:11:36 | INFO    | src.train | [fold5-imagenet] epoch 19/30 | lr 3.52e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2400 bal_acc 0.9691 auc 0.9979 | 15s
+2026-10-10 11:11:51 | INFO    | src.train | [fold5-imagenet] epoch 20/30 | lr 3.04e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2321 bal_acc 0.9747 auc 0.9993 | 14s
+2026-10-10 11:12:06 | INFO    | src.train | [fold5-imagenet] epoch 21/30 | lr 2.58e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2265 bal_acc 0.9755 auc 0.9987 | 15s
+2026-10-10 11:12:20 | INFO    | src.train | [fold5-imagenet] epoch 22/30 | lr 2.14e-05 | train loss 0.1994 bal_acc 0.9984 | val loss 0.2361 bal_acc 0.9747 auc 0.9996 | 14s
+2026-10-10 11:12:35 | INFO    | src.train | [fold5-imagenet] epoch 23/30 | lr 1.74e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2329 bal_acc 0.9747 auc 0.9996 | 15s
+2026-10-10 11:12:49 | INFO    | src.train | [fold5-imagenet] epoch 24/30 | lr 1.37e-05 | train loss 0.2007 bal_acc 0.9984 | val loss 0.2257 bal_acc 0.9691 auc 0.9989 | 14s
+2026-10-10 11:13:03 | INFO    | src.train | [fold5-imagenet] epoch 25/30 | lr 1.05e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2269 bal_acc 0.9699 auc 0.9989 | 14s
+2026-10-10 11:13:17 | INFO    | src.train | [fold5-imagenet] epoch 26/30 | lr 7.63e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2295 bal_acc 0.9699 auc 0.9986 | 14s
+2026-10-10 11:13:31 | INFO    | src.train | [fold5-imagenet] epoch 27/30 | lr 5.28e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2281 bal_acc 0.9747 auc 0.9990 | 14s
+2026-10-10 11:13:46 | INFO    | src.train | [fold5-imagenet] epoch 28/30 | lr 3.42e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2288 bal_acc 0.9747 auc 0.9990 | 14s
+2026-10-10 11:14:00 | INFO    | src.train | [fold5-imagenet] epoch 29/30 | lr 2.08e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2290 bal_acc 0.9747 auc 0.9990 | 14s
+2026-10-10 11:14:14 | INFO    | src.train | [fold5-imagenet] epoch 30/30 | lr 1.27e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2289 bal_acc 0.9747 auc 0.9990 | 14s
+2026-10-10 11:14:14 | INFO    | src.train | [fold5-imagenet] best epoch 14 (val balanced accuracy 0.9810) -> /home/guido/Development/ML/progetto-itoLUNGs/results/cv/fold_5/imagenet/best_model.pt
+2026-10-10 11:14:21 | INFO    | src.train | [fold5-imagenet] TEST balanced accuracy 0.9895 | sens 1.0000 | spec 0.9789 | AUC 0.9998
+2026-10-10 11:14:21 | INFO    | src.train | --- fold5-lunghist | B) ImageNet -> LungHist700 -> Canine ---
+2026-10-10 11:14:21 | INFO    | src.model | Loaded LungHist700 weights from /home/guido/Development/ML/progetto-itoLUNGs/results/pretrain/best_lunghist700.pt (head re-initialised)
+2026-10-10 11:14:36 | INFO    | src.train | [fold5-lunghist] epoch 01/30 | lr 1.00e-04 | train loss 0.2969 bal_acc 0.9459 | val loss 0.3979 bal_acc 0.8985 auc 0.9819 | 15s  <- best
+2026-10-10 11:14:50 | INFO    | src.train | [fold5-lunghist] epoch 02/30 | lr 9.97e-05 | train loss 0.2237 bal_acc 0.9921 | val loss 0.2671 bal_acc 0.9684 auc 0.9972 | 15s  <- best
+2026-10-10 11:15:05 | INFO    | src.train | [fold5-lunghist] epoch 03/30 | lr 9.89e-05 | train loss 0.2165 bal_acc 0.9889 | val loss 0.3109 bal_acc 0.9367 auc 0.9944 | 14s
+2026-10-10 11:15:19 | INFO    | src.train | [fold5-lunghist] epoch 04/30 | lr 9.76e-05 | train loss 0.2195 bal_acc 0.9890 | val loss 0.3543 bal_acc 0.9304 auc 0.9722 | 14s
+2026-10-10 11:15:34 | INFO    | src.train | [fold5-lunghist] epoch 05/30 | lr 9.57e-05 | train loss 0.2159 bal_acc 0.9889 | val loss 0.2782 bal_acc 0.9572 auc 0.9961 | 14s
+2026-10-10 11:15:48 | INFO    | src.train | [fold5-lunghist] epoch 06/30 | lr 9.34e-05 | train loss 0.2185 bal_acc 0.9872 | val loss 0.2943 bal_acc 0.9540 auc 0.9958 | 15s
+2026-10-10 11:16:03 | INFO    | src.train | [fold5-lunghist] epoch 07/30 | lr 9.05e-05 | train loss 0.2049 bal_acc 0.9952 | val loss 0.2801 bal_acc 0.9532 auc 0.9962 | 14s
+2026-10-10 11:16:18 | INFO    | src.train | [fold5-lunghist] epoch 08/30 | lr 8.73e-05 | train loss 0.2329 bal_acc 0.9855 | val loss 0.2637 bal_acc 0.9643 auc 0.9975 | 15s
+2026-10-10 11:16:32 | INFO    | src.train | [fold5-lunghist] epoch 09/30 | lr 8.36e-05 | train loss 0.2061 bal_acc 0.9952 | val loss 0.3659 bal_acc 0.9177 auc 0.9950 | 14s
+2026-10-10 11:16:47 | INFO    | src.train | [fold5-lunghist] epoch 10/30 | lr 7.96e-05 | train loss 0.2018 bal_acc 0.9984 | val loss 0.2367 bal_acc 0.9818 auc 0.9993 | 15s  <- best
+2026-10-10 11:17:01 | INFO    | src.train | [fold5-lunghist] epoch 11/30 | lr 7.52e-05 | train loss 0.2022 bal_acc 0.9984 | val loss 0.2584 bal_acc 0.9747 auc 0.9990 | 15s
+2026-10-10 11:17:15 | INFO    | src.train | [fold5-lunghist] epoch 12/30 | lr 7.06e-05 | train loss 0.1988 bal_acc 1.0000 | val loss 0.2513 bal_acc 0.9755 auc 0.9980 | 14s
+2026-10-10 11:17:30 | INFO    | src.train | [fold5-lunghist] epoch 13/30 | lr 6.58e-05 | train loss 0.1991 bal_acc 1.0000 | val loss 0.2445 bal_acc 0.9755 auc 0.9979 | 15s
+2026-10-10 11:17:45 | INFO    | src.train | [fold5-lunghist] epoch 14/30 | lr 6.08e-05 | train loss 0.1988 bal_acc 1.0000 | val loss 0.2392 bal_acc 0.9755 auc 0.9986 | 14s
+2026-10-10 11:17:59 | INFO    | src.train | [fold5-lunghist] epoch 15/30 | lr 5.57e-05 | train loss 0.1994 bal_acc 0.9984 | val loss 0.2575 bal_acc 0.9684 auc 0.9996 | 14s
+2026-10-10 11:18:13 | INFO    | src.train | [fold5-lunghist] epoch 16/30 | lr 5.05e-05 | train loss 0.1990 bal_acc 1.0000 | val loss 0.2352 bal_acc 0.9833 auc 0.9993 | 14s  <- best
+2026-10-10 11:18:28 | INFO    | src.train | [fold5-lunghist] epoch 17/30 | lr 4.53e-05 | train loss 0.1988 bal_acc 1.0000 | val loss 0.2407 bal_acc 0.9810 auc 0.9990 | 15s
+2026-10-10 11:18:43 | INFO    | src.train | [fold5-lunghist] epoch 18/30 | lr 4.02e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2399 bal_acc 0.9810 auc 0.9985 | 14s
+2026-10-10 11:18:57 | INFO    | src.train | [fold5-lunghist] epoch 19/30 | lr 3.52e-05 | train loss 0.1991 bal_acc 1.0000 | val loss 0.2546 bal_acc 0.9684 auc 0.9992 | 15s
+2026-10-10 11:19:12 | INFO    | src.train | [fold5-lunghist] epoch 20/30 | lr 3.04e-05 | train loss 0.2008 bal_acc 0.9984 | val loss 0.2341 bal_acc 0.9755 auc 0.9992 | 14s
+2026-10-10 11:19:26 | INFO    | src.train | [fold5-lunghist] epoch 21/30 | lr 2.58e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2362 bal_acc 0.9755 auc 0.9992 | 15s
+2026-10-10 11:19:41 | INFO    | src.train | [fold5-lunghist] epoch 22/30 | lr 2.14e-05 | train loss 0.1987 bal_acc 1.0000 | val loss 0.2467 bal_acc 0.9747 auc 0.9994 | 15s
+2026-10-10 11:19:56 | INFO    | src.train | [fold5-lunghist] epoch 23/30 | lr 1.74e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2385 bal_acc 0.9755 auc 0.9993 | 14s
+2026-10-10 11:20:10 | INFO    | src.train | [fold5-lunghist] epoch 24/30 | lr 1.37e-05 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2387 bal_acc 0.9810 auc 0.9993 | 14s
+2026-10-10 11:20:24 | INFO    | src.train | [fold5-lunghist] epoch 25/30 | lr 1.05e-05 | train loss 0.2013 bal_acc 0.9984 | val loss 0.2386 bal_acc 0.9755 auc 0.9993 | 14s
+2026-10-10 11:20:39 | INFO    | src.train | [fold5-lunghist] epoch 26/30 | lr 7.63e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2385 bal_acc 0.9755 auc 0.9993 | 14s
+2026-10-10 11:20:53 | INFO    | src.train | [fold5-lunghist] epoch 27/30 | lr 5.28e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2385 bal_acc 0.9755 auc 0.9993 | 14s
+2026-10-10 11:21:07 | INFO    | src.train | [fold5-lunghist] epoch 28/30 | lr 3.42e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2386 bal_acc 0.9755 auc 0.9993 | 14s
+2026-10-10 11:21:22 | INFO    | src.train | [fold5-lunghist] epoch 29/30 | lr 2.08e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2386 bal_acc 0.9755 auc 0.9993 | 15s
+2026-10-10 11:21:36 | INFO    | src.train | [fold5-lunghist] epoch 30/30 | lr 1.27e-06 | train loss 0.1986 bal_acc 1.0000 | val loss 0.2387 bal_acc 0.9755 auc 0.9993 | 14s
+2026-10-10 11:21:36 | INFO    | src.train | [fold5-lunghist] best epoch 16 (val balanced accuracy 0.9833) -> /home/guido/Development/ML/progetto-itoLUNGs/results/cv/fold_5/lunghist/best_model.pt
+2026-10-10 11:21:41 | INFO    | src.train | [fold5-lunghist] TEST balanced accuracy 0.9447 | sens 0.9000 | spec 0.9895 | AUC 0.9981
+2026-10-10 11:21:46 | INFO    | src.gradcam | Grad-CAM fold 5: 8 images -> /home/guido/Development/ML/progetto-itoLUNGs/results/cv/fold_5/gradcam/comparison_fold5.png
+2026-10-10 11:21:46 | INFO    | src.train | === Cross-validation summary (mean +/- std over folds) ===
+2026-10-10 11:21:46 | INFO    | src.train |   imagenet  balanced_accuracy  0.9728 +/- 0.0196
+2026-10-10 11:21:46 | INFO    | src.train |   imagenet  accuracy           0.9738 +/- 0.0187
+2026-10-10 11:21:46 | INFO    | src.train |   imagenet  sensitivity        0.9760 +/- 0.0428
+2026-10-10 11:21:46 | INFO    | src.train |   imagenet  specificity        0.9695 +/- 0.0257
+2026-10-10 11:21:46 | INFO    | src.train |   imagenet  precision          0.9723 +/- 0.0206
+2026-10-10 11:21:46 | INFO    | src.train |   imagenet  f1                 0.9735 +/- 0.0204
+2026-10-10 11:21:46 | INFO    | src.train |   imagenet  mcc                0.9485 +/- 0.0363
+2026-10-10 11:21:46 | INFO    | src.train |   imagenet  auc                0.9967 +/- 0.0038
+2026-10-10 11:21:46 | INFO    | src.train |   lunghist  balanced_accuracy  0.9732 +/- 0.0176
+2026-10-10 11:21:46 | INFO    | src.train |   lunghist  accuracy           0.9737 +/- 0.0182
+2026-10-10 11:21:46 | INFO    | src.train |   lunghist  sensitivity        0.9667 +/- 0.0416
+2026-10-10 11:21:46 | INFO    | src.train |   lunghist  specificity        0.9797 +/- 0.0236
+2026-10-10 11:21:46 | INFO    | src.train |   lunghist  precision          0.9816 +/- 0.0197
+2026-10-10 11:21:46 | INFO    | src.train |   lunghist  f1                 0.9735 +/- 0.0186
+2026-10-10 11:21:46 | INFO    | src.train |   lunghist  mcc                0.9485 +/- 0.0348
+2026-10-10 11:21:46 | INFO    | src.train |   lunghist  auc                0.9946 +/- 0.0047
+2026-10-10 11:21:46 | INFO    | src.train |   delta B-A balanced_accuracy  +0.0004 +/- 0.0287 (n=5)
+2026-10-10 11:21:46 | INFO    | src.train |   delta B-A accuracy           -0.0001 +/- 0.0289 (n=5)
+2026-10-10 11:21:46 | INFO    | src.train |   delta B-A sensitivity        -0.0093 +/- 0.0567 (n=5)
+2026-10-10 11:21:46 | INFO    | src.train |   delta B-A specificity        +0.0102 +/- 0.0071 (n=5)
+2026-10-10 11:21:46 | INFO    | src.train |   delta B-A precision          +0.0093 +/- 0.0063 (n=5)
+2026-10-10 11:21:46 | INFO    | src.train |   delta B-A f1                 -0.0000 +/- 0.0305 (n=5)
+2026-10-10 11:21:46 | INFO    | src.train |   delta B-A mcc                +0.0001 +/- 0.0557 (n=5)
+2026-10-10 11:21:46 | INFO    | src.train |   delta B-A auc                -0.0021 +/- 0.0014 (n=5)
+2026-10-10 11:21:46 | INFO    | src.train | Summary written to /home/guido/Development/ML/progetto-itoLUNGs/results/cv/summary.md

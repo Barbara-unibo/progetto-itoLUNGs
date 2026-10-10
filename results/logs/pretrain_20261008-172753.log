@@ -1,0 +1,43 @@
+2026-10-08 17:27:53 | INFO    | train | Command: train.py pretrain
+2026-10-08 17:27:53 | INFO    | src.utils | Python 3.14.8 | PyTorch 2.11.0+cu128 | platform Linux-7.2.8-cachyos2.fc44.x86_64-x86_64-with-glibc2.43
+2026-10-08 17:27:53 | INFO    | src.utils | GPU: NVIDIA GeForce RTX 5070 | 11.6 GB | CUDA 12.8 | bf16 supported: True
+2026-10-08 17:27:53 | INFO    | src.train | === Pre-training on LungHist700 (human) ===
+2026-10-08 17:27:53 | INFO    | src.dataset | Patient IDs: 691 entries read from data.csv
+2026-10-08 17:27:53 | WARNING | src.dataset | LungHist700: 1 images without patient ID are treated as individual groups
+2026-10-08 17:27:53 | INFO    | src.dataset | LungHist700 (binary): 692 images, 46 cases | Normal=151, Neoplastic=541
+2026-10-08 17:27:53 | INFO    | src.train |   train 34 cases,  555 images (Normal=122, Neoplastic=433)
+2026-10-08 17:27:53 | INFO    | src.train |   val   12 cases,  137 images (Normal=29, Neoplastic=108)
+2026-10-08 17:27:57 | INFO    | src.train | ConvNeXt-Tiny: 27.8M parameters
+2026-10-08 17:27:57 | INFO    | src.train | Class weights: [2.275, 0.641]
+2026-10-08 17:28:43 | INFO    | src.train | [pretrain-lunghist700] epoch 01/30 | lr 1.00e-04 | train loss 0.5768 bal_acc 0.7927 | val loss 0.3553 bal_acc 0.9735 auc 0.9978 | 46s  <- best
+2026-10-08 17:28:50 | INFO    | src.train | [pretrain-lunghist700] epoch 02/30 | lr 9.97e-05 | train loss 0.4300 bal_acc 0.8998 | val loss 0.3198 bal_acc 0.9735 auc 0.9978 | 8s  <- best
+2026-10-08 17:28:58 | INFO    | src.train | [pretrain-lunghist700] epoch 03/30 | lr 9.89e-05 | train loss 0.4338 bal_acc 0.9038 | val loss 0.2613 bal_acc 0.9655 auc 0.9994 | 7s
+2026-10-08 17:29:05 | INFO    | src.train | [pretrain-lunghist700] epoch 04/30 | lr 9.76e-05 | train loss 0.4221 bal_acc 0.9132 | val loss 0.2668 bal_acc 0.9390 auc 0.9946 | 7s
+2026-10-08 17:29:12 | INFO    | src.train | [pretrain-lunghist700] epoch 05/30 | lr 9.57e-05 | train loss 0.3996 bal_acc 0.9376 | val loss 0.2881 bal_acc 0.9781 auc 0.9984 | 7s  <- best
+2026-10-08 17:29:20 | INFO    | src.train | [pretrain-lunghist700] epoch 06/30 | lr 9.34e-05 | train loss 0.3615 bal_acc 0.9663 | val loss 0.3304 bal_acc 0.9470 auc 0.9891 | 7s
+2026-10-08 17:29:27 | INFO    | src.train | [pretrain-lunghist700] epoch 07/30 | lr 9.05e-05 | train loss 0.3460 bal_acc 0.9703 | val loss 0.5633 bal_acc 0.9028 auc 0.9842 | 7s
+2026-10-08 17:29:34 | INFO    | src.train | [pretrain-lunghist700] epoch 08/30 | lr 8.73e-05 | train loss 0.3869 bal_acc 0.9312 | val loss 0.3549 bal_acc 0.9550 auc 0.9936 | 7s
+2026-10-08 17:29:41 | INFO    | src.train | [pretrain-lunghist700] epoch 09/30 | lr 8.36e-05 | train loss 0.3376 bal_acc 0.9779 | val loss 0.2667 bal_acc 0.9655 auc 0.9904 | 7s
+2026-10-08 17:29:47 | INFO    | src.train | [pretrain-lunghist700] epoch 10/30 | lr 7.96e-05 | train loss 0.3447 bal_acc 0.9673 | val loss 0.2842 bal_acc 0.9609 auc 0.9828 | 6s
+2026-10-08 17:29:54 | INFO    | src.train | [pretrain-lunghist700] epoch 11/30 | lr 7.52e-05 | train loss 0.3284 bal_acc 0.9796 | val loss 0.2827 bal_acc 0.9609 auc 0.9943 | 6s
+2026-10-08 17:30:00 | INFO    | src.train | [pretrain-lunghist700] epoch 12/30 | lr 7.06e-05 | train loss 0.3235 bal_acc 0.9808 | val loss 0.2875 bal_acc 0.9609 auc 0.9927 | 7s
+2026-10-08 17:30:07 | INFO    | src.train | [pretrain-lunghist700] epoch 13/30 | lr 6.58e-05 | train loss 0.3356 bal_acc 0.9837 | val loss 0.2868 bal_acc 0.9436 auc 0.9665 | 7s
+2026-10-08 17:30:13 | INFO    | src.train | [pretrain-lunghist700] epoch 14/30 | lr 6.08e-05 | train loss 0.3000 bal_acc 0.9988 | val loss 0.2905 bal_acc 0.9563 auc 0.9639 | 7s
+2026-10-08 17:30:20 | INFO    | src.train | [pretrain-lunghist700] epoch 15/30 | lr 5.57e-05 | train loss 0.3026 bal_acc 0.9947 | val loss 0.2776 bal_acc 0.9483 auc 0.9666 | 6s
+2026-10-08 17:30:26 | INFO    | src.train | [pretrain-lunghist700] epoch 16/30 | lr 5.05e-05 | train loss 0.2979 bal_acc 0.9936 | val loss 0.3671 bal_acc 0.9457 auc 0.9927 | 7s
+2026-10-08 17:30:33 | INFO    | src.train | [pretrain-lunghist700] epoch 17/30 | lr 4.53e-05 | train loss 0.2991 bal_acc 0.9988 | val loss 0.2898 bal_acc 0.9516 auc 0.9745 | 7s
+2026-10-08 17:30:39 | INFO    | src.train | [pretrain-lunghist700] epoch 18/30 | lr 4.02e-05 | train loss 0.2953 bal_acc 1.0000 | val loss 0.3315 bal_acc 0.9516 auc 0.9649 | 7s
+2026-10-08 17:30:46 | INFO    | src.train | [pretrain-lunghist700] epoch 19/30 | lr 3.52e-05 | train loss 0.2944 bal_acc 0.9988 | val loss 0.2774 bal_acc 0.9483 auc 0.9954 | 7s
+2026-10-08 17:30:53 | INFO    | src.train | [pretrain-lunghist700] epoch 20/30 | lr 3.04e-05 | train loss 0.3033 bal_acc 0.9959 | val loss 0.2945 bal_acc 0.9516 auc 0.9899 | 7s
+2026-10-08 17:30:59 | INFO    | src.train | [pretrain-lunghist700] epoch 21/30 | lr 2.58e-05 | train loss 0.2996 bal_acc 1.0000 | val loss 0.2741 bal_acc 0.9655 auc 0.9920 | 7s
+2026-10-08 17:31:06 | INFO    | src.train | [pretrain-lunghist700] epoch 22/30 | lr 2.14e-05 | train loss 0.2983 bal_acc 0.9988 | val loss 0.2780 bal_acc 0.9483 auc 0.9697 | 7s
+2026-10-08 17:31:12 | INFO    | src.train | [pretrain-lunghist700] epoch 23/30 | lr 1.74e-05 | train loss 0.2998 bal_acc 1.0000 | val loss 0.2825 bal_acc 0.9609 auc 0.9799 | 7s
+2026-10-08 17:31:19 | INFO    | src.train | [pretrain-lunghist700] epoch 24/30 | lr 1.37e-05 | train loss 0.2941 bal_acc 1.0000 | val loss 0.2756 bal_acc 0.9483 auc 0.9733 | 7s
+2026-10-08 17:31:25 | INFO    | src.train | [pretrain-lunghist700] epoch 25/30 | lr 1.05e-05 | train loss 0.2950 bal_acc 1.0000 | val loss 0.2771 bal_acc 0.9655 auc 0.9770 | 7s
+2026-10-08 17:31:32 | INFO    | src.train | [pretrain-lunghist700] epoch 26/30 | lr 7.63e-06 | train loss 0.3027 bal_acc 1.0000 | val loss 0.2830 bal_acc 0.9609 auc 0.9764 | 7s
+2026-10-08 17:31:38 | INFO    | src.train | [pretrain-lunghist700] epoch 27/30 | lr 5.28e-06 | train loss 0.3011 bal_acc 1.0000 | val loss 0.2761 bal_acc 0.9483 auc 0.9697 | 7s
+2026-10-08 17:31:45 | INFO    | src.train | [pretrain-lunghist700] epoch 28/30 | lr 3.42e-06 | train loss 0.2961 bal_acc 1.0000 | val loss 0.2767 bal_acc 0.9655 auc 0.9709 | 7s
+2026-10-08 17:31:52 | INFO    | src.train | [pretrain-lunghist700] epoch 29/30 | lr 2.08e-06 | train loss 0.3007 bal_acc 1.0000 | val loss 0.2763 bal_acc 0.9655 auc 0.9721 | 7s
+2026-10-08 17:31:58 | INFO    | src.train | [pretrain-lunghist700] epoch 30/30 | lr 1.27e-06 | train loss 0.2933 bal_acc 1.0000 | val loss 0.2761 bal_acc 0.9483 auc 0.9730 | 7s
+2026-10-08 17:31:58 | INFO    | src.train | [pretrain-lunghist700] best epoch 5 (val balanced accuracy 0.9781) -> /home/guido/Development/ML/progetto-itoLUNGs/results/pretrain/best_lunghist700.pt
+2026-10-08 17:32:00 | INFO    | src.train | LungHist700 validation: balanced accuracy 0.9781, AUC 0.9984

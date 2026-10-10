@@ -1,0 +1,9 @@
+2026-10-10 09:57:23 | INFO    | train | Command: train.py prepare
+2026-10-10 09:57:23 | WARNING | src.dataset | IMAGE_ID 65 appears 5 times in the spreadsheet (patient 13/432)
+2026-10-10 09:57:23 | WARNING | src.dataset | IMAGE_ID 248 is assigned to several patients ['702/21', '429/18']: excluded
+2026-10-10 09:57:23 | WARNING | src.dataset | IMAGE_ID 882 is assigned to several patients ['21/459', '05/318']: excluded
+2026-10-10 09:57:23 | WARNING | src.dataset | 8 files have no patient in the spreadsheet and were EXCLUDED: ['nn_248_40x.jpg', 'nn_348_40x.jpg', 'nn_66_40x.jpg', 'nn_67_40x.jpg', 'nn_68_40x.jpg', 'nn_69_40x.jpg', 'nn_882_20x.jpg', 'nn_982_20x.jpg']
+2026-10-10 09:57:23 | WARNING | src.dataset | Cases with images of a single class only: ['01/899', 'AP16955']
+2026-10-10 09:57:23 | INFO    | src.dataset | Wrote /home/guido/Development/ML/progetto-itoLUNGs/data/canine.csv
+2026-10-10 09:57:23 | INFO    | src.dataset | canine.csv: 992 images, 50 cases | Normal=492, Neoplastic=500
+2026-10-10 09:57:23 | INFO    | src.dataset | Subtypes: {'normal': 492, 'pap': 290, 'sol': 60, 'acin': 60, 'squam': 50, 'micropap': 20, 'lep': 20}

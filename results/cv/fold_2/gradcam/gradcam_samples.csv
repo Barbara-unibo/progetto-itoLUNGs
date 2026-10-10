@@ -1,0 +1,9 @@
+image_path,case_id,label,pred_imagenet,pred_lunghist,prob_neoplastic_imagenet,prob_neoplastic_lunghist
+/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_508_40x.jpg,08/0045,0,0,0,0.04754531383514404,0.04756791517138481
+/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_23_20x.jpg,160/17,0,0,0,0.047227486968040466,0.049733635038137436
+/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_105_20x.jpg,277-23 sx,0,0,0,0.050323136150836945,0.04964388534426689
+/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_764_20x.jpg,98/1366,0,0,0,0.04742889106273651,0.046271275728940964
+/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_594_20x.jpg,13/845,1,1,1,0.9434728622436523,0.9422098994255066
+/home/guido/Development/ML/progetto-itoLUNGs/data/neo/lep_257_40x.jpg,702/21,1,1,1,0.950187623500824,0.9469438195228577
+/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_774_20x.jpg,98/1366,1,1,1,0.9531207084655762,0.951569139957428
+/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_780_40x.jpg,98/1366,1,1,1,0.9535472393035889,0.9503450393676758

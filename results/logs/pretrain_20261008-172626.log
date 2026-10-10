@@ -1,0 +1,16 @@
+2026-10-08 17:26:26 | INFO    | train | Command: train.py pretrain --lunghist-csv data/lunghist700_index.csv
+2026-10-08 17:26:26 | INFO    | src.utils | Python 3.14.8 | PyTorch 2.11.0+cu128 | platform Linux-7.2.8-cachyos2.fc44.x86_64-x86_64-with-glibc2.43
+2026-10-08 17:26:26 | INFO    | src.utils | GPU: NVIDIA GeForce RTX 5070 | 11.6 GB | CUDA 12.8 | bf16 supported: True
+2026-10-08 17:26:26 | INFO    | src.train | === Pre-training on LungHist700 (human) ===
+2026-10-08 17:26:26 | ERROR   | train | Run failed
+Traceback (most recent call last):
+  File "/home/guido/Development/ML/progetto-itoLUNGs/train.py", line 162, in main
+    run_pretraining(cfg, device)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/guido/Development/ML/progetto-itoLUNGs/src/train.py", line 333, in run_pretraining
+    df = build_lunghist_index(cfg.lunghist_root, cfg.lunghist_csv)
+  File "/home/guido/Development/ML/progetto-itoLUNGs/src/dataset.py", line 346, in build_lunghist_index
+    return load_image_csv(csv_path)
+  File "/home/guido/Development/ML/progetto-itoLUNGs/src/dataset.py", line 145, in load_image_csv
+    raise FileNotFoundError(f"CSV not found: {csv_path}")
+FileNotFoundError: CSV not found: data/lunghist700_index.csv

@@ -1,0 +1,190 @@
+case_id,image_path,label,subtype,magnification,fold,pred,prob_neoplastic,correct
+03/561,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_971_20x.jpg,1,sol,20x,2,1,0.9508236,True
+03/561,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_972_20x.jpg,1,sol,20x,2,1,0.9508692,True
+03/561,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_973_20x.jpg,1,sol,20x,2,1,0.9507779,True
+03/561,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_974_20x.jpg,1,sol,20x,2,1,0.9511876,True
+03/561,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_975_20x.jpg,1,sol,20x,2,1,0.950503,True
+03/561,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_976_40x.jpg,1,sol,40x,2,1,0.95013416,True
+03/561,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_977_40x.jpg,1,sol,40x,2,1,0.95145893,True
+03/561,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_978_40x.jpg,1,sol,40x,2,1,0.95136863,True
+03/561,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_979_40x.jpg,1,sol,40x,2,1,0.9508692,True
+03/561,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_980_40x.jpg,1,sol,40x,2,1,0.9502727,True
+03/561,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_961_20x.jpg,0,normal,20x,2,0,0.048631366,True
+03/561,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_962_20x.jpg,0,normal,20x,2,0,0.047958106,True
+03/561,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_963_20x.jpg,0,normal,20x,2,0,0.0475584,True
+03/561,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_964_20x.jpg,0,normal,20x,2,0,0.047691282,True
+03/561,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_965_20x.jpg,0,normal,20x,2,0,0.04845096,True
+03/561,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_966_40x.jpg,0,normal,40x,2,0,0.0472937,True
+03/561,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_967_40x.jpg,0,normal,40x,2,0,0.04720577,True
+03/561,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_968_40x.jpg,0,normal,40x,2,0,0.04809205,True
+03/561,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_969_40x.jpg,0,normal,40x,2,0,0.046855625,True
+03/561,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_970_40x.jpg,0,normal,40x,2,0,0.046551276,True
+06/1055,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_751_20x.jpg,1,pap,20x,2,1,0.9509148,True
+06/1055,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_752_20x.jpg,1,pap,20x,2,1,0.9512782,True
+06/1055,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_753_20x.jpg,1,pap,20x,2,1,0.95150405,True
+06/1055,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_754_20x.jpg,1,pap,20x,2,1,0.9512782,True
+06/1055,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_755_20x.jpg,1,pap,20x,2,1,0.9519527,True
+06/1055,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_756_40x.jpg,1,pap,40x,2,1,0.9513234,True
+06/1055,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_757_40x.jpg,1,pap,40x,2,1,0.94980925,True
+06/1055,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_758_40x.jpg,1,pap,40x,2,1,0.95154905,True
+06/1055,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_759_40x.jpg,1,pap,40x,2,1,0.9492005,True
+06/1055,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_760_40x.jpg,1,pap,40x,2,1,0.9498557,True
+06/1055,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_741_20x.jpg,0,normal,20x,2,0,0.046768475,True
+06/1055,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_742_20x.jpg,0,normal,20x,2,0,0.046594642,True
+06/1055,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_743_20x.jpg,0,normal,20x,2,0,0.04716187,True
+06/1055,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_744_20x.jpg,0,normal,20x,2,0,0.046768475,True
+06/1055,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_745_20x.jpg,0,normal,20x,2,0,0.04747001,True
+06/1055,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_746_40x.jpg,0,normal,40x,2,0,0.04840596,True
+06/1055,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_747_40x.jpg,0,normal,40x,2,0,0.046768475,True
+06/1055,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_748_40x.jpg,0,normal,40x,2,0,0.048496004,True
+06/1055,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_749_40x.jpg,0,normal,40x,2,0,0.04672496,True
+06/1055,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_750_40x.jpg,0,normal,40x,2,0,0.04881242,True
+08/0045,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_511_20x.jpg,1,pap,20x,2,1,0.95208645,True
+08/0045,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_512_20x.jpg,1,pap,20x,2,1,0.9519973,True
+08/0045,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_513_20x.jpg,1,pap,20x,2,1,0.95136863,True
+08/0045,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_514_20x.jpg,1,pap,20x,2,1,0.9517288,True
+08/0045,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_515_20x.jpg,1,pap,20x,2,1,0.95565146,True
+08/0045,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_516_40x.jpg,1,pap,40x,2,1,0.9517737,True
+08/0045,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_517_40x.jpg,1,pap,40x,2,1,0.95150405,True
+08/0045,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_518_40x.jpg,1,pap,40x,2,1,0.9511876,True
+08/0045,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_519_40x.jpg,1,pap,40x,2,1,0.9499951,True
+08/0045,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_520_40x.jpg,1,pap,40x,2,1,0.9510514,True
+08/0045,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_501_20x.jpg,0,normal,20x,2,0,0.04720577,True
+08/0045,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_502_20x.jpg,0,normal,20x,2,0,0.047913533,True
+08/0045,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_503_20x.jpg,0,normal,20x,2,0,0.047780067,True
+08/0045,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_504_20x.jpg,0,normal,20x,2,1,0.9494355,False
+08/0045,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_505_20x.jpg,0,normal,20x,2,0,0.04751418,True
+08/0045,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_506_40x.jpg,0,normal,40x,2,0,0.04698664,True
+08/0045,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_507_40x.jpg,0,normal,40x,2,0,0.048360992,True
+08/0045,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_508_40x.jpg,0,normal,40x,2,0,0.0475584,True
+08/0045,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_509_40x.jpg,0,normal,40x,2,0,0.046291906,True
+08/0045,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_510_40x.jpg,0,normal,40x,2,0,0.047249716,True
+13/845,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_591_20x.jpg,1,sol,20x,2,1,0.6890899,True
+13/845,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_592_20x.jpg,1,sol,20x,2,1,0.94649786,True
+13/845,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_593_20x.jpg,1,sol,20x,2,1,0.9448931,True
+13/845,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_594_20x.jpg,1,sol,20x,2,1,0.94218844,True
+13/845,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_595_20x.jpg,1,sol,20x,2,1,0.9451974,True
+13/845,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_596_40x.jpg,1,sol,40x,2,1,0.9513234,True
+13/845,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_597_40x.jpg,1,sol,40x,2,1,0.9505489,True
+13/845,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_598_40x.jpg,1,sol,40x,2,1,0.95036495,True
+13/845,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_599_40x.jpg,1,sol,40x,2,1,0.9546474,True
+13/845,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/sol_600_40x.jpg,1,sol,40x,2,1,0.9519973,True
+13/845,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_581_20x.jpg,0,normal,20x,2,0,0.047030386,True
+13/845,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_582_20x.jpg,0,normal,20x,2,0,0.047118,True
+13/845,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_583_20x.jpg,0,normal,20x,2,0,0.04720577,True
+13/845,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_584_20x.jpg,0,normal,20x,2,0,0.046855625,True
+13/845,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_585_20x.jpg,0,normal,20x,2,0,0.046248805,True
+13/845,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_586_40x.jpg,0,normal,40x,2,0,0.046638038,True
+13/845,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_587_40x.jpg,0,normal,40x,2,0,0.047780067,True
+13/845,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_588_40x.jpg,0,normal,40x,2,0,0.04672496,True
+13/845,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_589_40x.jpg,0,normal,40x,2,0,0.047030386,True
+13/845,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_590_40x.jpg,0,normal,40x,2,0,0.04689926,True
+160/17,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_31_20x.jpg,1,pap,20x,2,1,0.95150405,True
+160/17,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_32_20x.jpg,1,pap,20x,2,1,0.9505489,True
+160/17,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_33_20x.jpg,1,pap,20x,2,1,0.95068645,True
+160/17,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_34_20x.jpg,1,pap,20x,2,1,0.9495292,True
+160/17,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_35_20x.jpg,1,pap,20x,2,1,0.94994867,True
+160/17,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_36_40x.jpg,1,pap,40x,2,1,0.9503189,True
+160/17,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_37_40x.jpg,1,pap,40x,2,1,0.9502727,True
+160/17,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_38_40x.jpg,1,pap,40x,2,1,0.95136863,True
+160/17,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_39_40x.jpg,1,pap,40x,2,1,0.9509604,True
+160/17,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_40_40x.jpg,1,pap,40x,2,1,0.9509148,True
+160/17,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_21_20x.jpg,0,normal,20x,2,0,0.049497057,True
+160/17,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_22_20x.jpg,0,normal,20x,2,0,0.046551276,True
+160/17,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_23_20x.jpg,0,normal,20x,2,0,0.04972728,True
+160/17,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_24_20x.jpg,0,normal,20x,2,0,0.049497057,True
+160/17,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_25_20x.jpg,0,normal,20x,2,0,0.048226345,True
+160/17,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_26_40x.jpg,0,normal,40x,2,0,0.04716187,True
+160/17,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_27_40x.jpg,0,normal,40x,2,0,0.04845096,True
+160/17,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_28_40x.jpg,0,normal,40x,2,0,0.07589242,True
+160/17,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_29_40x.jpg,0,normal,40x,2,0,0.047425874,True
+160/17,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_30_40x.jpg,0,normal,40x,2,0,0.050611433,True
+277-23 sx,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_111_20x.jpg,1,pap,20x,2,1,0.9548163,True
+277-23 sx,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_112_20x.jpg,1,pap,20x,2,1,0.9519527,True
+277-23 sx,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_113_20x.jpg,1,pap,20x,2,1,0.9493885,True
+277-23 sx,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_114_20x.jpg,1,pap,20x,2,1,0.9494823,True
+277-23 sx,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_115_20x.jpg,1,pap,20x,2,1,0.9486801,True
+277-23 sx,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_116_40x.jpg,1,pap,40x,2,1,0.95418006,True
+277-23 sx,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_117_40x.jpg,1,pap,40x,2,1,0.95150405,True
+277-23 sx,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_118_40x.jpg,1,pap,40x,2,1,0.9524858,True
+277-23 sx,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_119_40x.jpg,1,pap,40x,2,1,0.9532751,True
+277-23 sx,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_120_40x.jpg,1,pap,40x,2,1,0.9524416,True
+277-23 sx,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_101_20x.jpg,0,normal,20x,2,0,0.04972728,True
+277-23 sx,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_102_20x.jpg,0,normal,20x,2,0,0.051130094,True
+277-23 sx,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_103_20x.jpg,0,normal,20x,2,0,0.04986591,True
+277-23 sx,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_104_20x.jpg,0,normal,20x,2,0,0.051177494,True
+277-23 sx,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_105_20x.jpg,0,normal,20x,2,0,0.049681157,True
+277-23 sx,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_106_40x.jpg,0,normal,40x,2,0,0.05037733,True
+277-23 sx,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_107_40x.jpg,0,normal,40x,2,0,0.05009776,True
+277-23 sx,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_108_40x.jpg,0,normal,40x,2,0,0.04881242,True
+277-23 sx,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_109_40x.jpg,0,normal,40x,2,0,0.05009776,True
+277-23 sx,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_110_40x.jpg,0,normal,40x,2,0,0.051082738,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_191_20x.jpg,1,pap,20x,2,1,0.9506406,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_192_20x.jpg,1,pap,20x,2,1,0.9499023,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_193_20x.jpg,1,pap,20x,2,1,0.9508692,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_194_20x.jpg,1,pap,20x,2,1,0.94980925,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_195_20x.jpg,1,pap,20x,2,1,0.94994867,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_196_40x.jpg,1,pap,40x,2,1,0.94829834,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_197_40x.jpg,1,pap,40x,2,1,0.9494823,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_198_40x.jpg,1,pap,40x,2,1,0.9507779,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_199_40x.jpg,1,pap,40x,2,1,0.9514138,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_200_40x.jpg,1,pap,40x,2,1,0.950457,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_181_20x.jpg,0,normal,20x,2,0,0.04668148,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_182_20x.jpg,0,normal,20x,2,0,0.048631366,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_183_20x.jpg,0,normal,20x,2,0,0.047118,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_184_20x.jpg,0,normal,20x,2,0,0.04782452,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_185_20x.jpg,0,normal,20x,2,0,0.046507955,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_186_40x.jpg,0,normal,40x,2,0,0.047913533,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_187_40x.jpg,0,normal,40x,2,0,0.047735654,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_188_40x.jpg,0,normal,40x,2,0,0.04694293,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_189_40x.jpg,0,normal,40x,2,0,0.047249716,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_190_40x.jpg,0,normal,40x,2,0,0.049958523,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_321_20x.jpg,0,normal,20x,2,0,0.046464667,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_322_20x.jpg,0,normal,20x,2,0,0.04689926,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_323_20x.jpg,0,normal,20x,2,0,0.047118,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_324_20x.jpg,0,normal,20x,2,0,0.04611975,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_325_20x.jpg,0,normal,20x,2,0,0.046378206,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_326_40x.jpg,0,normal,40x,2,0,0.04716187,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_327_40x.jpg,0,normal,40x,2,0,0.04620575,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_328_40x.jpg,0,normal,40x,2,0,0.04747001,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_329_40x.jpg,0,normal,40x,2,0,0.047118,True
+472/22,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_330_40x.jpg,0,normal,40x,2,0,0.0475584,True
+702/21,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/lep_251_20x.jpg,1,lep,20x,2,1,0.9378969,True
+702/21,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/lep_252_20x.jpg,1,lep,20x,2,1,0.93985814,True
+702/21,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/lep_253_20x.jpg,1,lep,20x,2,1,0.9459013,True
+702/21,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/lep_254_20x.jpg,1,lep,20x,2,1,0.94224155,True
+702/21,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/lep_255_20x.jpg,1,lep,20x,2,1,0.9393595,True
+702/21,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/lep_256_40x.jpg,1,lep,40x,2,1,0.9222025,True
+702/21,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/lep_257_40x.jpg,1,lep,40x,2,1,0.94694114,True
+702/21,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/lep_258_40x_.jpg,1,lep,40x,2,0,0.070751965,False
+702/21,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/lep_259_40x.jpg,1,lep,40x,2,1,0.9443824,True
+702/21,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/lep_260_40x.jpg,1,lep,40x,2,0,0.049267832,False
+702/21,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_241_20x.jpg,0,normal,20x,2,0,0.04751418,True
+702/21,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_242_20x.jpg,0,normal,20x,2,0,0.046594642,True
+702/21,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_243_20x.jpg,0,normal,20x,2,0,0.046507955,True
+702/21,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_244_20x.jpg,0,normal,20x,2,0,0.047735654,True
+702/21,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_245_20x.jpg,0,normal,20x,2,0,0.046507955,True
+702/21,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_246_40x.jpg,0,normal,40x,2,0,0.046378206,True
+702/21,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_247_40x.jpg,0,normal,40x,2,0,0.04620575,True
+702/21,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_249_40x.jpg,0,normal,40x,2,0,0.045734636,True
+702/21,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_250_20x.jpg,0,normal,20x,2,0,0.046421416,True
+98/1366,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_771_20x.jpg,1,pap,20x,2,1,0.94957596,True
+98/1366,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_772_20x.jpg,1,pap,20x,2,1,0.9514138,True
+98/1366,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_773_20x.jpg,1,pap,20x,2,1,0.9518632,True
+98/1366,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_774_20x.jpg,1,pap,20x,2,1,0.95154905,True
+98/1366,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_775_20x.jpg,1,pap,20x,2,1,0.94966936,True
+98/1366,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_776_40x.jpg,1,pap,40x,2,1,0.95270634,True
+98/1366,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_777_40x.jpg,1,pap,40x,2,1,0.94776917,True
+98/1366,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_778_40x.jpg,1,pap,40x,2,1,0.94853723,True
+98/1366,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_779_40x.jpg,1,pap,40x,2,1,0.9489646,True
+98/1366,/home/guido/Development/ML/progetto-itoLUNGs/data/neo/pap_780_40x.jpg,1,pap,40x,2,1,0.9503189,True
+98/1366,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_761_20x.jpg,0,normal,20x,2,0,0.050705362,True
+98/1366,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_762_20x.jpg,0,normal,20x,2,0,0.04681203,True
+98/1366,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_763_20x.jpg,0,normal,20x,2,0,0.04668148,True
+98/1366,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_764_20x.jpg,0,normal,20x,2,0,0.046291906,True
+98/1366,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_765_20x.jpg,0,normal,20x,2,0,0.047691282,True
+98/1366,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_766_40x.jpg,0,normal,40x,2,0,0.046551276,True
+98/1366,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_767_40x.jpg,0,normal,40x,2,0,0.046594642,True
+98/1366,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_768_40x.jpg,0,normal,40x,2,0,0.046768475,True
+98/1366,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_769_40x.jpg,0,normal,40x,2,0,0.047735654,True
+98/1366,/home/guido/Development/ML/progetto-itoLUNGs/data/nn/nn_770_40x.jpg,0,normal,40x,2,0,0.04689926,True
