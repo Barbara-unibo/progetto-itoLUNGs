@@ -1,0 +1,17 @@
+{
+  "fold": 4,
+  "setting": "lunghist",
+  "best_epoch": 2,
+  "val_balanced_accuracy": 1.0,
+  "n_test_images": 209,
+  "n_test_cases": 11,
+  "balanced_accuracy": 0.9898989898989898,
+  "accuracy": 0.9904306220095693,
+  "sensitivity": 1.0,
+  "specificity": 0.9797979797979798,
+  "precision": 0.9821428571428571,
+  "f1": 0.990990990990991,
+  "mcc": 0.9809697178310792,
+  "auc": 0.9999081726354453,
+  "loss": 0.07114988312339099
+}

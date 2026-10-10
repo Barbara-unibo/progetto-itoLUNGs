@@ -21,10 +21,14 @@ from sklearn.model_selection import StratifiedGroupKFold
 from torch.utils.data import DataLoader, Dataset
 from torchvision import transforms as T
 
-from .config import IMAGENET_MEAN, IMAGENET_STD, Config
+from .config import IMAGENET_MEAN, IMAGENET_STD, MACENKO_TARGET_IMG, Config
 from .utils import seed_worker
+from .utils import MacenkoTransform
+
 
 logger = logging.getLogger(__name__)
+
+macenko_norm = MacenkoTransform(target_image_path=MACENKO_TARGET_IMG)
 
 REQUIRED_COLUMNS: tuple[str, ...] = ("case_id", "image_path", "label")
 IMAGE_EXTENSIONS: frozenset[str] = frozenset({".jpg", ".jpeg", ".png", ".tif", ".tiff", ".bmp"})
@@ -54,12 +58,14 @@ class RandomRot90:
         return f"{self.__class__.__name__}()"
 
 
-def build_transforms(img_size: int, train: bool) -> T.Compose:
+def build_transforms(img_size: int, train: bool, macenko_norm: MacenkoTransform = None) -> T.Compose:
     """Histology-friendly augmentation; evaluation resizes the whole field of view."""
     normalize = T.Normalize(IMAGENET_MEAN, IMAGENET_STD)
+    transforms_list = []
+    if macenko_norm is not None:
+        transforms_list.append(macenko_norm)
     if train:
-        return T.Compose(
-            [
+        transforms_list.extend([
                 T.RandomResizedCrop(img_size, scale=(0.5, 1.0), ratio=(3 / 4, 4 / 3), antialias=True),
                 T.RandomHorizontalFlip(),
                 T.RandomVerticalFlip(),
@@ -68,9 +74,15 @@ def build_transforms(img_size: int, train: bool) -> T.Compose:
                 T.RandomApply([T.ColorJitter(brightness=0.15, contrast=0.15, saturation=0.15, hue=0.03)], p=0.8),
                 T.ToTensor(),
                 normalize,
-            ]
-        )
-    return T.Compose([T.Resize((img_size, img_size), antialias=True), T.ToTensor(), normalize])
+            ])
+    else:
+        transforms_list.extend([
+            T.Resize((img_size, img_size), antialias=True),
+            T.ToTensor(),
+            normalize
+        ]
+    )
+    return T.Compose(transforms_list)
 
 
 # --------------------------------------------------------------------- dataset
@@ -112,7 +124,7 @@ def make_loader(df: pd.DataFrame, cfg: Config, train: bool, seed: int, persisten
     )
     if cfg.num_workers > 0:
         kwargs.update(persistent_workers=persistent, prefetch_factor=2)
-    return DataLoader(HistologyDataset(df, build_transforms(cfg.img_size, train)), **kwargs)
+    return DataLoader(HistologyDataset(df, build_transforms(cfg.img_size, train, macenko_norm=macenko_norm)), **kwargs)
 
 
 # ------------------------------------------------------------- CSV utilities

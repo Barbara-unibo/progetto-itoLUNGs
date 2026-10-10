@@ -26,6 +26,10 @@ from sklearn.metrics import (
     roc_auc_score,
 )
 
+from PIL import Image
+import torchstain
+
+
 logger = logging.getLogger(__name__)
 
 # Metrics reported for every evaluation; the first one drives model selection.
@@ -256,3 +260,89 @@ def plot_training_history(history: pd.DataFrame, out_path: Path, title: str) -> 
     fig.tight_layout()
     fig.savefig(out_path, dpi=150)
     plt.close(fig)
+
+
+class MacenkoTransform(torch.nn.Module):
+    """
+    Hyper-optimized Macenko Transform for uniform single-microscope datasets.
+    Calculates BOTH source and target characteristics ONCE at initialization.
+    Uses pseudo-inverse mapping to handle non-square stain vectors cleanly.
+    """
+    def __init__(self, target_image_path: str = None):
+        super().__init__()
+        self.device = torch.device("cpu")
+
+        # Register PyTorch buffers for seamless multiprocessing pickling
+        self.register_buffer("t_stain", None)
+        self.register_buffer("target_max_c", None)
+        self.register_buffer("source_max_c", None)
+        self.register_buffer("source_stain_pinv", None)
+
+        if target_image_path:
+            if not os.path.exists(target_image_path):
+                raise FileNotFoundError(f"Stain reference template not found at {target_image_path}")
+
+            # Compute reference profile once at initialization
+            normalizer = torchstain.normalizers.MacenkoNormalizer(backend="torch")
+            img = Image.open(target_image_path).convert("RGB")
+            tensor = torch.from_numpy(np.array(img)).to(self.device)
+            normalizer.fit(tensor)
+
+            # Extract stain profile vectors safely
+            t_stain_np = normalizer.HERef.cpu().numpy()
+            target_max_c_np = normalizer.maxCRef.cpu().numpy()
+
+            # FIXED: Use Moore-Penrose pseudo-inverse (pinv) to handle non-square (2x3) dimensions safely
+            source_stain_pinv_np = np.linalg.pinv(t_stain_np)
+            source_max_c_np = target_max_c_np
+
+            # Convert arrays to explicit float PyTorch Tensors for registration
+            self.t_stain = torch.from_numpy(t_stain_np).float()
+            self.target_max_c = torch.from_numpy(target_max_c_np).float()
+            self.source_max_c = torch.from_numpy(source_max_c_np).float()
+            self.source_stain_pinv = torch.from_numpy(source_stain_pinv_np).float()
+
+            self.Io = 255.0
+
+    def forward(self, img: Image.Image) -> Image.Image:
+        img_np = np.array(img.convert("RGB"))
+        h, w, c = img_np.shape
+
+        # High-speed background pruning step
+        if (np.sum(img_np.mean(axis=2) > 235) / img_np.size * 3) > 0.92:
+            return img
+
+        # Flatten pixels for pure linear dot matrix transforms
+        img_pixels = img_np.reshape(-1, 3).astype(np.float32)
+
+        try:
+            # 1. Convert to Optical Density Space
+            img_pixels = np.clip(img_pixels, 1.0, 255.0)
+            OD = -np.log(img_pixels / self.Io)
+
+            # 2. Extract out tensors from buffer to perform clean numpy matrix math on workers
+            source_stain_pinv_np = self.source_stain_pinv.numpy()
+            target_max_c_np = self.target_max_c.numpy()
+            source_max_c_np = self.source_max_c.numpy()
+            t_stain_np = self.t_stain.numpy()
+
+            # 3. Direct Multiplications (Zero SVD runtime spikes, zero non-square issues)
+            # Depending on torchstain version orientation, handle either (OD . pinv) or (pinv . OD) matrix math
+            if source_stain_pinv_np.shape[0] == OD.shape[1]:
+                source_concentrations = np.dot(OD, source_stain_pinv_np)
+            else:
+                source_concentrations = np.dot(OD, source_stain_pinv_np.T)
+
+            source_concentrations *= (target_max_c_np / source_max_c_np)
+            norm_OD = np.dot(source_concentrations, t_stain_np)
+
+            # 4. Revert to standard color boundaries
+            norm_img = self.Io * np.exp(-norm_OD)
+            norm_img = np.clip(norm_img, 0, 255).astype(np.uint8)
+
+            return Image.fromarray(norm_img.reshape(h, w, c))
+        except Exception:
+            return img
+
+    def __call__(self, img: Image.Image) -> Image.Image:
+        return self.forward(img)

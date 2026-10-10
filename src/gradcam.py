@@ -19,11 +19,14 @@ from pytorch_grad_cam import GradCAM
 from pytorch_grad_cam.utils.image import show_cam_on_image
 from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
 
-from .config import CLASS_NAMES, IMAGENET_MEAN, IMAGENET_STD, SETTING_IMAGENET, SETTING_LABELS, SETTING_LUNGHIST, Config
+from .config import CLASS_NAMES, IMAGENET_MEAN, IMAGENET_STD, SETTING_IMAGENET, SETTING_LABELS, SETTING_LUNGHIST, MACENKO_TARGET_IMG, Config
 from .dataset import build_transforms
 from .model import get_gradcam_target_layers, load_model_from_checkpoint
+from .utils import MacenkoTransform
 
 logger = logging.getLogger(__name__)
+
+macenko_norm = MacenkoTransform(target_image_path=MACENKO_TARGET_IMG)
 
 
 @dataclass
@@ -114,7 +117,7 @@ def run_gradcam_comparison(
     ``images/``. Titles are green for correct and red for wrong predictions.
     """
     samples = select_samples(test_df, cfg.gradcam_per_class, seed=cfg.seed + fold)
-    transform = build_transforms(cfg.img_size, train=False)
+    transform = build_transforms(cfg.img_size, train=False, macenko_norm=macenko_norm)
     inputs: list[torch.Tensor] = []
     for path in samples["image_path"]:
         with Image.open(path) as img:

@@ -129,11 +129,8 @@ name (`nn_*` → Normal, any other prefix → Neoplastic). Every inconsistency i
 > **Data-quality issues found in the current spreadsheet** (please fix them at the source if possible):
 > * `nn_66_40x … nn_69_40x`: the spreadsheet repeats `IMAGE_ID 65` four times instead of 66–69, so these 4 files have no patient. They are excluded.
 > * `nn_348_40x`, `nn_982_20x`: IDs absent from the spreadsheet → excluded (IDs 248, 629, 882 are listed twice).
-> * IDs 321–330 (AP16955, normal) and 786–790 have no image file. The `nn/` folder holds 485 files, not 500.
-> * Objective mismatches between file name and spreadsheet (e.g. `nn_26…30` are `40x` on disk but `20x` in the sheet; `nn_250`). The file name is used.
-> * `pap?` (cases 10/125, 21/459) is treated as `pap`; `717-23 ` has a trailing space that is stripped.
 >
-> After `prepare`, check the log for the final counts (expected ≈ 979 images, 50 cases).
+> After `prepare`, check the log for the final counts (expected ≈ 992 images, 50 cases).
 
 ### 4.2 LungHist700 (human, pre-training only)
 

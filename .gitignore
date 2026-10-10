@@ -12,7 +12,6 @@ env/
 data/
 
 # Experiment outputs and model weights
-results/
 *.pt
 *.pth
 *.ckpt

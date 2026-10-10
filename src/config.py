@@ -27,7 +27,8 @@ SETTING_LABELS: dict[str, str] = {
     SETTING_IMAGENET: "A) ImageNet -> Canine",
     SETTING_LUNGHIST: "B) ImageNet -> LungHist700 -> Canine",
 }
-
+# Macenko target image path
+MACENKO_TARGET_IMG: Path = PROJECT_ROOT / "data" / "anchor_canine_slide.jpg"
 
 def _default_num_workers() -> int:
     return min(8, os.cpu_count() or 1)
@@ -37,7 +38,7 @@ def _default_num_workers() -> int:
 class Config:
     # ------------------------------------------------------------------ paths
     canine_csv: Path = PROJECT_ROOT / "data" / "canine.csv"
-    canine_raw_csv: Path = PROJECT_ROOT / "data" / "CANINELUNGHISTO(Foglio1).csv"
+    canine_raw_csv: Path = PROJECT_ROOT / "data" / "CANINELUNGHISTO.csv"
     canine_image_dirs: tuple[Path, ...] = (
         PROJECT_ROOT / "data" / "nn",
         PROJECT_ROOT / "data" / "neo",
