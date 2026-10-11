@@ -21,3 +21,6 @@ data/
 Thumbs.db
 .vscode/
 .idea/
+
+*.pptx
+*.ps1
