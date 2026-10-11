@@ -21,7 +21,16 @@ from sklearn.model_selection import StratifiedGroupKFold
 from torch.utils.data import DataLoader, Dataset
 from torchvision import transforms as T
 
-from .config import IMAGENET_MEAN, IMAGENET_STD, MACENKO_TARGET_IMG, Config
+from .config import (
+    CLASS_NAMES,
+    IMAGENET_MEAN,
+    IMAGENET_STD,
+    LABEL_ADENO,
+    LABEL_NON_ADENO,
+    LABEL_NORMAL,
+    MACENKO_TARGET_IMG,
+    Config,
+)
 from .utils import seed_worker
 from .utils import MacenkoTransform
 
@@ -36,12 +45,34 @@ IMAGE_EXTENSIONS: frozenset[str] = frozenset({".jpg", ".jpeg", ".png", ".tif", "
 # Canine file names look like "<class>_<image id>_<objective>.jpg", e.g. "acin_491_20x.jpg".
 _CANINE_FILE_RE = re.compile(r"^(?P<cls>[a-z?]+)_(?P<id>\d+)_(?P<mag>\d+x)", re.IGNORECASE)
 CANINE_NORMAL_CLASSES: frozenset[str] = frozenset({"nn", "nor", "normal"})
+# Adenocarcinoma patterns (papillary, acinar, micropapillary, lepidic).
+CANINE_ADENO_CLASSES: frozenset[str] = frozenset({"pap", "acin", "micropap", "lep"})
+# Non-adenocarcinoma tumours (squamous cell carcinoma, solid carcinoma).
+CANINE_NON_ADENO_CLASSES: frozenset[str] = frozenset({"squam", "sol"})
 
-# LungHist700 tokens (file-name parts or folder names) mapped to the binary task.
+# LungHist700 tokens (file-name parts or folder names) mapped to the three-class task.
+# Generic tokens such as "carcinoma" or "tumour" are deliberately absent: they do not
+# tell adenocarcinoma from squamous cell carcinoma.
 LUNGHIST_NORMAL_TOKENS: frozenset[str] = frozenset({"nor", "normal", "healthy"})
-LUNGHIST_TUMOUR_TOKENS: frozenset[str] = frozenset(
-    {"aca", "scc", "adenocarcinoma", "squamous", "carcinoma", "tumor", "tumour", "neoplastic"}
-)
+LUNGHIST_ADENO_TOKENS: frozenset[str] = frozenset({"aca", "adenocarcinoma"})
+LUNGHIST_NON_ADENO_TOKENS: frozenset[str] = frozenset({"scc", "squamous"})
+
+
+def canine_label(cls: str) -> int | None:
+    """Three-class label of a canine class prefix (``None`` if the prefix is unknown)."""
+    cls = cls.lower().rstrip("?")
+    if cls in CANINE_NORMAL_CLASSES:
+        return LABEL_NORMAL
+    if cls in CANINE_ADENO_CLASSES:
+        return LABEL_ADENO
+    if cls in CANINE_NON_ADENO_CLASSES:
+        return LABEL_NON_ADENO
+    return None
+
+
+def _class_counts(df: pd.DataFrame) -> str:
+    counts = df["label"].value_counts().to_dict()
+    return ", ".join(f"{name}={counts.get(i, 0)}" for i, name in enumerate(CLASS_NAMES))
 
 
 # ------------------------------------------------------------------ transforms
@@ -136,15 +167,7 @@ def _relative_or_absolute(path: Path, base: Path) -> str:
 
 
 def _log_dataset_summary(df: pd.DataFrame, name: str) -> None:
-    counts = df["label"].value_counts().to_dict()
-    logger.info(
-        "%s: %d images, %d cases | Normal=%d, Neoplastic=%d",
-        name,
-        len(df),
-        df["case_id"].nunique(),
-        counts.get(0, 0),
-        counts.get(1, 0),
-    )
+    logger.info("%s: %d images, %d cases | %s", name, len(df), df["case_id"].nunique(), _class_counts(df))
 
 
 def load_image_csv(csv_path: Path, check_files: bool = True) -> pd.DataFrame:
@@ -162,9 +185,18 @@ def load_image_csv(csv_path: Path, check_files: bool = True) -> pd.DataFrame:
     df = df.dropna(subset=list(REQUIRED_COLUMNS)).copy()
     df["case_id"] = df["case_id"].astype(str).str.strip()
     df["label"] = df["label"].astype(int)
-    invalid = sorted(set(df["label"].unique()) - {0, 1})
+    invalid = sorted(set(df["label"].unique()) - set(range(len(CLASS_NAMES))))
     if invalid:
-        raise ValueError(f"Labels must be 0 (Normal) or 1 (Neoplastic); found {invalid}")
+        raise ValueError(
+            f"Labels must be 0 (Normal), 1 (Adenocarcinoma) or 2 (Non-adenocarcinoma); found {invalid}"
+        )
+    absent = [name for i, name in enumerate(CLASS_NAMES) if i not in set(df["label"])]
+    if absent:
+        logger.warning(
+            "%s contains no images of class(es) %s. Was it built for the binary task? Re-run `python train.py prepare`.",
+            csv_path.name,
+            absent,
+        )
 
     base = csv_path.resolve().parent
     df["image_path"] = [
@@ -198,9 +230,10 @@ def build_canine_csv(raw_csv: Path, image_dirs: Sequence[Path], out_csv: Path) -
 
     The raw spreadsheet (``PATIENT_ID, IMAGE_ID, OBJECTIVE, SUPERCLASS``) is used
     only to map each image ID to its patient. The image files on disk are the
-    source of truth for the label (``nn_*`` = Normal, any other class = Neoplastic),
-    because the file name and the spreadsheet sometimes disagree on the objective.
-    Files whose ID is missing from the spreadsheet are excluded and reported.
+    source of truth for the label (``nn_*`` = Normal; ``pap/acin/micropap/lep_*`` =
+    Adenocarcinoma; ``squam/sol_*`` = Non-adenocarcinoma), because the file name and
+    the spreadsheet sometimes disagree on the objective. Files whose ID is missing
+    from the spreadsheet, or whose class prefix is unknown, are excluded and reported.
     """
     raw_csv, out_csv = Path(raw_csv), Path(out_csv)
     raw = _read_raw_csv(raw_csv)
@@ -232,6 +265,7 @@ def build_canine_csv(raw_csv: Path, image_dirs: Sequence[Path], out_csv: Path) -
     seen_ids: dict[int, Path] = {}
     unparsable: list[str] = []
     unmatched: list[str] = []
+    unknown_class: list[str] = []
     conflicting: list[str] = []
     for image_dir in map(Path, image_dirs):
         if not image_dir.is_dir():
@@ -251,9 +285,12 @@ def build_canine_csv(raw_csv: Path, image_dirs: Sequence[Path], out_csv: Path) -
                 unmatched.append(path.name)
                 continue
             cls = match["cls"].lower().rstrip("?")
-            label = 0 if cls in CANINE_NORMAL_CLASSES else 1
+            label = canine_label(cls)
+            if label is None:
+                unknown_class.append(path.name)
+                continue
             csv_cls = id_to_class.get(image_id)
-            if csv_cls is not None and (csv_cls in CANINE_NORMAL_CLASSES) != (label == 0):
+            if csv_cls is not None and canine_label(csv_cls) != label:
                 conflicting.append(f"{path.name} (spreadsheet: {csv_cls})")
                 continue
             records.append(
@@ -270,6 +307,8 @@ def build_canine_csv(raw_csv: Path, image_dirs: Sequence[Path], out_csv: Path) -
         logger.warning("%d files with unrecognised names skipped, e.g. %s", len(unparsable), unparsable[:10])
     if unmatched:
         logger.warning("%d files have no patient in the spreadsheet and were EXCLUDED: %s", len(unmatched), unmatched)
+    if unknown_class:
+        logger.warning("%d files with an unknown class prefix were EXCLUDED: %s", len(unknown_class), unknown_class)
     if conflicting:
         logger.warning("%d files whose class contradicts the spreadsheet were EXCLUDED: %s", len(conflicting), conflicting)
     ids_without_file = sorted(set(id_to_patient) - set(seen_ids))
@@ -294,14 +333,16 @@ def build_canine_csv(raw_csv: Path, image_dirs: Sequence[Path], out_csv: Path) -
 
 # -------------------------------------------------------- LungHist700 index
 def _lunghist_label(path: Path, root: Path) -> tuple[int, str] | None:
-    """Binary label from file-name tokens first, then from folder names."""
+    """Three-class label from file-name tokens first, then from folder names."""
     tokens = re.split(r"[_\-\s.]+", path.stem.lower())
     folders = [part.lower() for part in path.relative_to(root).parts[:-1]]
     for token in tokens + folders:
         if token in LUNGHIST_NORMAL_TOKENS:
-            return 0, "normal"
-        if token in LUNGHIST_TUMOUR_TOKENS:
-            return 1, token
+            return LABEL_NORMAL, "normal"
+        if token in LUNGHIST_ADENO_TOKENS:
+            return LABEL_ADENO, token
+        if token in LUNGHIST_NON_ADENO_TOKENS:
+            return LABEL_NON_ADENO, token
     return None
 
 
@@ -347,7 +388,7 @@ def _lunghist_patient_map(root: Path) -> dict[str, str]:
 
 
 def build_lunghist_index(root: Path, csv_path: Path | None = None) -> pd.DataFrame:
-    """Index LungHist700 as a binary dataset (``nor`` -> 0; ``aca_*``, ``scc_*`` -> 1).
+    """Index LungHist700 as a three-class dataset (``nor`` -> 0; ``aca_*`` -> 1; ``scc_*`` -> 2).
 
     If ``csv_path`` is given it is loaded directly (``case_id, image_path, label``).
     Otherwise images under ``root`` are scanned and patient IDs are recovered from
@@ -399,7 +440,7 @@ def build_lunghist_index(root: Path, csv_path: Path | None = None) -> pd.DataFra
         logger.warning("LungHist700: %d images without patient ID are treated as individual groups", n_missing)
     fallback = "img_" + df["image_path"].map(lambda s: Path(s).stem)
     df["case_id"] = df["case_id"].fillna(fallback).astype(str)
-    _log_dataset_summary(df, "LungHist700 (binary)")
+    _log_dataset_summary(df, "LungHist700 (3 classes)")
     return df
 
 
@@ -408,7 +449,7 @@ def make_patient_folds(df: pd.DataFrame, n_splits: int, seed: int) -> pd.DataFra
     """Assign every case to one of ``n_splits`` folds (1-based).
 
     StratifiedGroupKFold keeps each patient in a single fold (groups = ``case_id``)
-    while balancing the Normal/Neoplastic label across folds.
+    while balancing the three-class label across folds.
     """
     n_cases = df["case_id"].nunique()
     if n_cases < n_splits:
@@ -440,18 +481,12 @@ def get_or_create_folds(df: pd.DataFrame, folds_csv: Path, n_splits: int, seed: 
         folds = make_patient_folds(df, n_splits, seed)
         folds_csv.parent.mkdir(parents=True, exist_ok=True)
         folds.to_csv(folds_csv, index=False)
-        logger.info("Created %d patient-level folds (stratified by Normal/Neoplastic) -> %s", n_splits, folds_csv)
+        logger.info("Created %d patient-level folds (stratified by the three-class label) -> %s", n_splits, folds_csv)
 
     merged = df.merge(folds, on="case_id", how="left")
     for fold, frame in merged.groupby("fold"):
-        counts = frame["label"].value_counts().to_dict()
         logger.info(
-            "  fold %d: %2d cases, %4d images (Normal=%d, Neoplastic=%d)",
-            fold,
-            frame["case_id"].nunique(),
-            len(frame),
-            counts.get(0, 0),
-            counts.get(1, 0),
+            "  fold %d: %2d cases, %4d images (%s)", fold, frame["case_id"].nunique(), len(frame), _class_counts(frame)
         )
     return folds
 

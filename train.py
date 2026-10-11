@@ -2,7 +2,7 @@
 
 Examples
 --------
-    python train.py prepare                 # build data/canine.csv from the raw spreadsheet
+    python train.py prepare                 # build data/canine_3class.csv from the raw spreadsheet
     python train.py pretrain                # ImageNet -> LungHist700 (human only)
     python train.py cv                      # 5-fold CV: settings A and B + Grad-CAM + summary
     python train.py all                     # pretrain + cv
@@ -30,7 +30,7 @@ logger = logging.getLogger("train")
 def _common_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(add_help=False)
     g = p.add_argument_group("general")
-    g.add_argument("--output-dir", type=Path, help="results directory (default: results/)")
+    g.add_argument("--output-dir", type=Path, help="results directory (default: results_3class/)")
     g.add_argument("--seed", type=int)
     g.add_argument("--img-size", type=int)
     g.add_argument("--batch-size", type=int)
@@ -46,7 +46,7 @@ def _common_parser() -> argparse.ArgumentParser:
 
 def _canine_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(add_help=False)
-    p.add_argument("--canine-csv", type=Path, help="case_id,image_path,label CSV (default: data/canine.csv)")
+    p.add_argument("--canine-csv", type=Path, help="case_id,image_path,label CSV (default: data/canine_3class.csv)")
     return p
 
 

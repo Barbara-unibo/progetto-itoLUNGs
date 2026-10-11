@@ -19,7 +19,7 @@ from pytorch_grad_cam import GradCAM
 from pytorch_grad_cam.utils.image import show_cam_on_image
 from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
 
-from .config import CLASS_NAMES, IMAGENET_MEAN, IMAGENET_STD, SETTING_IMAGENET, SETTING_LABELS, SETTING_LUNGHIST, MACENKO_TARGET_IMG, Config
+from .config import CLASS_KEYS, CLASS_NAMES, IMAGENET_MEAN, IMAGENET_STD, SETTING_IMAGENET, SETTING_LABELS, SETTING_LUNGHIST, MACENKO_TARGET_IMG, Config
 from .dataset import build_transforms
 from .model import get_gradcam_target_layers, load_model_from_checkpoint
 from .utils import MacenkoTransform
@@ -32,7 +32,7 @@ macenko_norm = MacenkoTransform(target_image_path=MACENKO_TARGET_IMG)
 @dataclass
 class CamResult:
     pred: int
-    prob_neoplastic: float
+    probs: np.ndarray  # softmax probability of every class
     target: int
     cam: np.ndarray  # HxW in [0, 1]
 
@@ -67,7 +67,7 @@ def _explain(
             pred = int(probs.argmax())
             target = label if target_mode == "true" else pred
             grayscale = cam(input_tensor=x, targets=[ClassifierOutputTarget(target)])[0]
-            results.append(CamResult(pred=pred, prob_neoplastic=float(probs[1]), target=target, cam=grayscale))
+            results.append(CamResult(pred=pred, probs=probs, target=target, cam=grayscale))
     return results
 
 
@@ -88,7 +88,7 @@ def _plot_rows(rows: list[dict], out_path: Path, title: str, dpi: int) -> None:
             axes[i][j].imshow(overlay)
             axes[i][j].set_title(
                 f"{SETTING_LABELS[setting]}\n"
-                f"pred: {CLASS_NAMES[result.pred]} (P_neo={result.prob_neoplastic:.2f}) | "
+                f"pred: {CLASS_NAMES[result.pred]} (P={result.probs[result.pred]:.2f}) | "
                 f"CAM: {CLASS_NAMES[result.target]}",
                 fontsize=8,
                 color="darkgreen" if correct else "firebrick",
@@ -159,7 +159,11 @@ def run_gradcam_comparison(
                 "case_id": samples.loc[i, "case_id"],
                 "label": labels[i],
                 **{f"pred_{s}": explanations[s][i].pred for s in explanations},
-                **{f"prob_neoplastic_{s}": explanations[s][i].prob_neoplastic for s in explanations},
+                **{
+                    f"prob_{key}_{s}": float(explanations[s][i].probs[c])
+                    for s in explanations
+                    for c, key in enumerate(CLASS_KEYS)
+                },
             }
             for i in range(len(samples))
         ]

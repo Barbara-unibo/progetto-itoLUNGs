@@ -13,8 +13,11 @@ from typing import Any
 
 PROJECT_ROOT: Path = Path(__file__).resolve().parent.parent
 
-# Binary task: index 0 = Normal, index 1 = Neoplastic (positive class).
-CLASS_NAMES: tuple[str, str] = ("Normal", "Neoplastic")
+# Three-class task: 0 = Normal, 1 = Adenocarcinoma, 2 = Non-adenocarcinoma.
+CLASS_NAMES: tuple[str, str, str] = ("Normal", "Adenocarcinoma", "Non-adenocarcinoma")
+LABEL_NORMAL, LABEL_ADENO, LABEL_NON_ADENO = 0, 1, 2
+# Column-friendly class names (per-class metrics and probability columns).
+CLASS_KEYS: tuple[str, str, str] = ("normal", "adenocarcinoma", "non_adenocarcinoma")
 
 IMAGENET_MEAN: tuple[float, float, float] = (0.485, 0.456, 0.406)
 IMAGENET_STD: tuple[float, float, float] = (0.229, 0.224, 0.225)
@@ -37,7 +40,8 @@ def _default_num_workers() -> int:
 @dataclass
 class Config:
     # ------------------------------------------------------------------ paths
-    canine_csv: Path = PROJECT_ROOT / "data" / "canine.csv"
+    # Kept apart from the binary pipeline's data/canine.csv and results/ so both can coexist.
+    canine_csv: Path = PROJECT_ROOT / "data" / "canine_3class.csv"
     canine_raw_csv: Path = PROJECT_ROOT / "data" / "CANINELUNGHISTO.csv"
     canine_image_dirs: tuple[Path, ...] = (
         PROJECT_ROOT / "data" / "nn",
@@ -46,7 +50,7 @@ class Config:
     lunghist_root: Path = PROJECT_ROOT / "data" / "LungHist700"
     # Optional pre-built index (case_id, image_path, label) that bypasses auto-detection.
     lunghist_csv: Path | None = None
-    output_dir: Path = PROJECT_ROOT / "results"
+    output_dir: Path = PROJECT_ROOT / "results_3class"
     # Optional explicit path of the pre-trained checkpoint used by setting B.
     pretrain_checkpoint_path: Path | None = None
 
@@ -54,7 +58,7 @@ class Config:
     seed: int = 42
     deterministic: bool = False  # True = bit-reproducible but slower (disables cudnn.benchmark)
     img_size: int = 512
-    num_classes: int = 2
+    num_classes: int = len(CLASS_NAMES)
     batch_size: int = 12
     num_workers: int = field(default_factory=_default_num_workers)
     amp: bool = True
@@ -67,7 +71,7 @@ class Config:
     weight_decay: float = 0.05
     min_lr: float = 1e-6
     max_grad_norm: float | None = 1.0
-    use_class_weights: bool = True  # inverse-frequency CE weights (LungHist700 is imbalanced)
+    use_class_weights: bool = True  # inverse-frequency CE weights (both datasets are imbalanced)
 
     # ----------------------------------------------- pre-training (LungHist700)
     pretrain_epochs: int = 30
@@ -115,8 +119,8 @@ class Config:
         """Fail fast on inconsistent settings."""
         if self.img_size % 32 != 0:
             raise ValueError(f"img_size must be a multiple of 32 for ConvNeXt, got {self.img_size}")
-        if self.num_classes != 2:
-            raise ValueError("This project implements binary classification only (num_classes=2).")
+        if self.num_classes != len(CLASS_NAMES):
+            raise ValueError(f"This project implements {len(CLASS_NAMES)}-class classification only (num_classes={len(CLASS_NAMES)}).")
         if self.n_splits < 2:
             raise ValueError("n_splits must be >= 2")
         for name in ("inner_val_fraction", "pretrain_val_fraction"):

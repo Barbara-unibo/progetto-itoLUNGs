@@ -2,7 +2,7 @@
 
 Pipeline
 --------
-1. ``run_pretraining``: ImageNet ConvNeXt-Tiny -> binary LungHist700 (human only).
+1. ``run_pretraining``: ImageNet ConvNeXt-Tiny -> three-class LungHist700 (human only).
 2. ``run_cross_validation``: for every canine fold, fine-tune
    A) from ImageNet weights and B) from the LungHist700 checkpoint, using the
    same folds, inner validation patients, seeds, data order and hyper-parameters.
@@ -28,7 +28,7 @@ from sklearn.metrics import confusion_matrix
 from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
 
-from .config import CLASS_NAMES, SETTING_IMAGENET, SETTING_LABELS, SETTING_LUNGHIST, SETTINGS, Config
+from .config import CLASS_KEYS, CLASS_NAMES, SETTING_IMAGENET, SETTING_LABELS, SETTING_LUNGHIST, SETTINGS, Config
 from .dataset import (
     assert_patient_disjoint,
     build_lunghist_index,
@@ -148,7 +148,7 @@ def train_one_epoch(
 def evaluate(
     model: nn.Module, loader: DataLoader, criterion: nn.Module, cfg: Config, device: torch.device, desc: str
 ) -> dict[str, Any]:
-    """Returns loss, labels, predictions, P(Neoplastic) and dataset indices."""
+    """Returns loss, labels, predictions, class probabilities (N x C) and dataset indices."""
     model.eval()
     total_loss, n_seen = 0.0, 0
     y_true, y_pred, y_prob, indices = [], [], [], []
@@ -162,7 +162,7 @@ def evaluate(
         probs = torch.softmax(logits, dim=1)
         y_true.append(labels.cpu().numpy())
         y_pred.append(probs.argmax(dim=1).cpu().numpy())
-        y_prob.append(probs[:, 1].cpu().numpy())
+        y_prob.append(probs.cpu().numpy())
         indices.append(idx.numpy())
     return {
         "loss": total_loss / max(n_seen, 1),
@@ -242,7 +242,7 @@ def fit(
                 "train_balanced_accuracy": train_stats["balanced_accuracy"],
                 "val_loss": val["loss"],
                 "val_balanced_accuracy": bal_acc,
-                "val_auc": val_metrics["auc"],
+                "val_auc": val_metrics["auc_macro"],
                 "is_best": improved,
                 "seconds": elapsed,
             }
@@ -257,7 +257,7 @@ def fit(
             train_stats["balanced_accuracy"],
             val["loss"],
             bal_acc,
-            val_metrics["auc"],
+            val_metrics["auc_macro"],
             elapsed,
             "  <- best" if improved else "",
         )
@@ -290,12 +290,13 @@ def evaluate_and_save(
     if not np.array_equal(predictions["label"].to_numpy(), out["y_true"]):
         raise RuntimeError("Prediction/label alignment check failed")
     predictions["pred"] = out["y_pred"]
-    predictions["prob_neoplastic"] = out["y_prob"]
+    for c, key in enumerate(CLASS_KEYS):
+        predictions[f"prob_{key}"] = out["y_prob"][:, c]
     predictions["correct"] = predictions["pred"] == predictions["label"]
     out_dir.mkdir(parents=True, exist_ok=True)
     predictions.to_csv(out_dir / f"{split_name}_predictions.csv", index=False)
 
-    cm = confusion_matrix(out["y_true"], out["y_pred"], labels=[0, 1])
+    cm = confusion_matrix(out["y_true"], out["y_pred"], labels=list(range(len(CLASS_NAMES))))
     plot_confusion_matrix(cm, CLASS_NAMES, out_dir / f"confusion_matrix_{split_name}.png", title)
     return metrics
 
@@ -313,19 +314,13 @@ def _save_split(path: Path, **splits: pd.DataFrame) -> None:
 
 def _log_split(name: str, df: pd.DataFrame) -> None:
     counts = df["label"].value_counts().to_dict()
-    logger.info(
-        "  %-5s %2d cases, %4d images (Normal=%d, Neoplastic=%d)",
-        name,
-        df["case_id"].nunique(),
-        len(df),
-        counts.get(0, 0),
-        counts.get(1, 0),
-    )
+    per_class = ", ".join(f"{n}={counts.get(i, 0)}" for i, n in enumerate(CLASS_NAMES))
+    logger.info("  %-5s %2d cases, %4d images (%s)", name, df["case_id"].nunique(), len(df), per_class)
 
 
 # ----------------------------------------------------------- pre-training
 def run_pretraining(cfg: Config, device: torch.device) -> Path:
-    """Pre-train ConvNeXt-Tiny (ImageNet init) on binary LungHist700. Human images only."""
+    """Pre-train ConvNeXt-Tiny (ImageNet init) on three-class LungHist700. Human images only."""
     logger.info("=== Pre-training on LungHist700 (human) ===")
     seed_everything(cfg.seed, cfg.deterministic)
     out_dir = cfg.pretrain_dir
@@ -369,7 +364,9 @@ def run_pretraining(cfg: Config, device: torch.device) -> Path:
         model, val_loader, val_df, cfg, device, out_dir, "val", "LungHist700 validation (best checkpoint)"
     )
     save_json(metrics, out_dir / "val_metrics.json")
-    logger.info("LungHist700 validation: balanced accuracy %.4f, AUC %.4f", metrics["balanced_accuracy"], metrics["auc"])
+    logger.info(
+        "LungHist700 validation: balanced accuracy %.4f, macro AUC %.4f", metrics["balanced_accuracy"], metrics["auc_macro"]
+    )
 
     del model, train_loader, val_loader
     _free_memory()
@@ -378,7 +375,7 @@ def run_pretraining(cfg: Config, device: torch.device) -> Path:
 
 # ------------------------------------------------------- cross-validation
 def load_canine_with_folds(cfg: Config) -> pd.DataFrame:
-    """Canine DataFrame with a 1-based ``fold`` column (patient-level, stratified by label)."""
+    """Canine DataFrame with a 1-based ``fold`` column (patient-level, stratified by the 3-class label)."""
     df = load_image_csv(cfg.canine_csv)
     folds = get_or_create_folds(df, cfg.folds_csv, cfg.n_splits, cfg.seed)
     df = df.merge(folds, on="case_id", how="left", validate="many_to_one")
@@ -448,12 +445,13 @@ def run_single_setting(
     }
     save_json(result, run_dir / TEST_METRICS)
     logger.info(
-        "[%s] TEST balanced accuracy %.4f | sens %.4f | spec %.4f | AUC %.4f",
+        "[%s] TEST balanced accuracy %.4f | recall normal %.4f, adeno %.4f, non-adeno %.4f | macro AUC %.4f",
         run_name,
         metrics["balanced_accuracy"],
-        metrics["sensitivity"],
-        metrics["specificity"],
-        metrics["auc"],
+        metrics["recall_normal"],
+        metrics["recall_adenocarcinoma"],
+        metrics["recall_non_adenocarcinoma"],
+        metrics["auc_macro"],
     )
 
     del model, train_loader, val_loader, test_loader
@@ -598,7 +596,9 @@ def summarize_cv(cfg: Config) -> pd.DataFrame | None:
         cms = {}
         for setting in present:
             subset = pooled[pooled["setting"] == setting]
-            cms[SETTING_LABELS[setting]] = confusion_matrix(subset["label"], subset["pred"], labels=[0, 1])
+            cms[SETTING_LABELS[setting]] = confusion_matrix(
+                subset["label"], subset["pred"], labels=list(range(len(CLASS_NAMES)))
+            )
             plot_confusion_matrix(
                 cms[SETTING_LABELS[setting]],
                 CLASS_NAMES,

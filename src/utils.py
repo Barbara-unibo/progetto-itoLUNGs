@@ -29,6 +29,8 @@ from sklearn.metrics import (
 from PIL import Image
 import torchstain
 
+from .config import CLASS_KEYS, LABEL_NORMAL
+
 
 logger = logging.getLogger(__name__)
 
@@ -36,12 +38,12 @@ logger = logging.getLogger(__name__)
 METRIC_NAMES: tuple[str, ...] = (
     "balanced_accuracy",
     "accuracy",
-    "sensitivity",
-    "specificity",
-    "precision",
-    "f1",
+    "precision_macro",
+    "f1_macro",
     "mcc",
-    "auc",
+    "auc_macro",
+    *(f"recall_{key}" for key in CLASS_KEYS),
+    "neoplastic_sensitivity",
 )
 
 
@@ -124,28 +126,35 @@ def compute_class_weights(labels: Iterable[int], num_classes: int) -> torch.Tens
     return torch.tensor(weights, dtype=torch.float32)
 
 
-def compute_metrics(y_true: Sequence[int], y_pred: Sequence[int], y_prob: Sequence[float]) -> dict[str, float]:
-    """Binary metrics with Neoplastic (1) as the positive class.
+def compute_metrics(y_true: Sequence[int], y_pred: Sequence[int], y_prob: np.ndarray) -> dict[str, float]:
+    """Three-class metrics (Normal / Adenocarcinoma / Non-adenocarcinoma).
 
-    Sensitivity = recall of Neoplastic, specificity = recall of Normal,
-    balanced accuracy = their mean. AUC uses the predicted P(Neoplastic).
+    ``y_prob`` holds the softmax probabilities, shape ``(n_images, n_classes)``.
+    Balanced accuracy = mean per-class recall. Macro precision, F1 and one-vs-rest
+    AUC average only over the classes present in ``y_true`` (a small test fold may
+    lack a class); the recall of an absent class is NaN. ``neoplastic_sensitivity``
+    is the fraction of tumour images (either tumour class) not predicted as Normal.
     """
     y_true = np.asarray(y_true, dtype=int)
     y_pred = np.asarray(y_pred, dtype=int)
     y_prob = np.asarray(y_prob, dtype=float)
-    tn, fp, fn, tp = confusion_matrix(y_true, y_pred, labels=[0, 1]).ravel()
-    sensitivity = tp / (tp + fn) if (tp + fn) > 0 else float("nan")
-    specificity = tn / (tn + fp) if (tn + fp) > 0 else float("nan")
-    both_classes = len(np.unique(y_true)) == 2
+    n_classes = len(CLASS_KEYS)
+    cm = confusion_matrix(y_true, y_pred, labels=list(range(n_classes)))
+    support = cm.sum(axis=1)
+    recalls = np.divide(np.diag(cm), support, out=np.full(n_classes, np.nan), where=support > 0)
+    present = [c for c in range(n_classes) if support[c] > 0]
+
+    aucs = [roc_auc_score(y_true == c, y_prob[:, c]) for c in present if support[c] < len(y_true)]
+    tumour = y_true != LABEL_NORMAL
     return {
-        "balanced_accuracy": float(np.nanmean([sensitivity, specificity])),
+        "balanced_accuracy": float(np.nanmean(recalls)),
         "accuracy": float(accuracy_score(y_true, y_pred)),
-        "sensitivity": float(sensitivity),
-        "specificity": float(specificity),
-        "precision": float(precision_score(y_true, y_pred, zero_division=0)),
-        "f1": float(f1_score(y_true, y_pred, zero_division=0)),
+        "precision_macro": float(precision_score(y_true, y_pred, labels=present, average="macro", zero_division=0)),
+        "f1_macro": float(f1_score(y_true, y_pred, labels=present, average="macro", zero_division=0)),
         "mcc": float(matthews_corrcoef(y_true, y_pred)),
-        "auc": float(roc_auc_score(y_true, y_prob)) if both_classes else float("nan"),
+        "auc_macro": float(np.mean(aucs)) if aucs else float("nan"),
+        **{f"recall_{key}": float(recalls[c]) for c, key in enumerate(CLASS_KEYS)},
+        "neoplastic_sensitivity": float(np.mean(y_pred[tumour] != LABEL_NORMAL)) if tumour.any() else float("nan"),
     }
 
 
@@ -194,7 +203,7 @@ def _draw_confusion_matrix(ax: plt.Axes, cm: np.ndarray, class_names: Sequence[s
     pct = np.divide(cm, row_sums, out=np.zeros_like(cm, dtype=float), where=row_sums > 0)
     image = ax.imshow(pct, cmap="Blues", vmin=0.0, vmax=1.0)
     ticks = np.arange(len(class_names))
-    ax.set_xticks(ticks, labels=class_names)
+    ax.set_xticks(ticks, labels=class_names, rotation=20, ha="right")
     ax.set_yticks(ticks, labels=class_names)
     ax.set_xlabel("Predicted")
     ax.set_ylabel("True")
@@ -216,7 +225,7 @@ def _draw_confusion_matrix(ax: plt.Axes, cm: np.ndarray, class_names: Sequence[s
 def plot_confusion_matrix(cm: np.ndarray, class_names: Sequence[str], out_path: Path, title: str) -> None:
     """Counts with row-normalised percentages (i.e. per-class recall)."""
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    fig, ax = plt.subplots(figsize=(5, 4.5))
+    fig, ax = plt.subplots(figsize=(6, 5.2))
     image = _draw_confusion_matrix(ax, cm, class_names, title)
     fig.colorbar(image, ax=ax, fraction=0.046, pad=0.04)
     fig.tight_layout()
@@ -228,7 +237,7 @@ def plot_confusion_matrices_side_by_side(
     cms: Mapping[str, np.ndarray], class_names: Sequence[str], out_path: Path, suptitle: str
 ) -> None:
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    fig, axes = plt.subplots(1, len(cms), figsize=(5 * len(cms), 4.8), squeeze=False)
+    fig, axes = plt.subplots(1, len(cms), figsize=(6 * len(cms), 5.5), squeeze=False)
     for ax, (title, cm) in zip(axes[0], cms.items()):
         _draw_confusion_matrix(ax, cm, class_names, title)
     fig.suptitle(suptitle)
